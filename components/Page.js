@@ -9,11 +9,10 @@ export default function Page({
   justifyContent,
 }) {
   return (
-    <VStack minHeight="100vH" border="solid">
+    <VStack minHeight="100vH">
       <Header />
       <VStack
         minH="100vh"
-        border="solid"
         minW="100%"
         padding={padding}
         alignContent={alignContent}

@@ -31,13 +31,13 @@ export default function Header() {
       display="flex"
       direction="row"
       justify="space-between"
-      border="solid"
       height="20"
       padding="6"
       width="100%"
       align="center"
       position="sticky"
       top="0"
+      bgColor="pink.100"
     >
       <NextLink href="/">
         <Link fontSize={28}>HOME</Link>

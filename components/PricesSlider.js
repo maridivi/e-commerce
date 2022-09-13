@@ -9,13 +9,11 @@ import {
 
 function PricesSlider({ sliderValue, onChange }) {
   return (
-    <Box height="100px" width="300px" marginTop="40px" textAlign="center">
-      <Text fontWeight="bold" fontSize="lg">
+    <Box height="100px" width="300px" marginTop="40px" textAlign="left">
+      <Text fontWeight="bold" fontSize="lg" mb="2">
         Price
       </Text>
-      <Text fontSize="md">{`${convertTime(sliderValue[0])}-${convertTime(
-        sliderValue[1]
-      )}`}</Text>
+      <Text fontSize="md">0 - 500 </Text>
       <RangeSlider
         aria-label={["min", "max"]}
         min={0}
@@ -23,6 +21,7 @@ function PricesSlider({ sliderValue, onChange }) {
         step={10}
         onChange={onChange}
         value={sliderValue}
+        w="200px"
       >
         <RangeSliderTrack>
           <RangeSliderFilledTrack />

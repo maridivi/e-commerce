@@ -7,8 +7,8 @@ export default function Footer() {
       padding="6"
       bottom="0"
       width="100%"
-      border="solid"
       position="absolute"
+      bgColor="pink.100"
     ></Stack>
   );
 }

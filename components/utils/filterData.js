@@ -1,4 +1,4 @@
-export const url = "https://api.escuelajs.co/api/v1/products";
+export const url = "https://fakestoreapi.com/products";
 
 export const categories = [
   "All",
