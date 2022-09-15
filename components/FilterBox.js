@@ -1,17 +1,10 @@
-import {
-  Box,
-  Checkbox,
-  CheckboxGroup,
-  Stack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Checkbox, CheckboxGroup, Stack, Text } from "@chakra-ui/react";
 import PricesSlider from "./PricesSlider";
-import { categories, stars } from "./utils/filterData";
+import { categories, stars } from "../utils/filterData";
 
 export default function FilterBox() {
   return (
-    <Stack padding={6} marginRight="30px">
+    <Stack padding={6}>
       <Text fontWeight="extrabold" fontSize="lg">
         Categories
       </Text>
