@@ -7,46 +7,82 @@ import {
   useMediaQuery,
   VStack,
 } from "@chakra-ui/react";
-import { createContext, useCallback, useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import FilterBox from "../components/FilterBox";
 import FilterModal from "../components/FilterModal";
 import Page from "../components/Page";
 import SingleProduct from "../components/SingleProduct";
+import { FilterContext } from "./_app";
 
 const ProductsContext = createContext({
   fetchedProducts: undefined,
-  setFetchedProducts: () => {},
 });
 
-export default function Shop() {
+export async function getServerSideProps(context) {
+  // const id = context.query.id;
+  try {
+    const products = (await axios.get("https://fakestoreapi.com/products"))
+      .data;
+    return { props: { products } };
+  } catch (err) {
+    console.error(err.toString());
+    return { props: {} };
+  }
+}
+
+export default function Shop({ products }) {
   const [isBiggerThan960] = useMediaQuery("(min-width: 960px)");
   const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
+  const [order, setOrder] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState(undefined);
+  // const [fetchedProducts, setFetchedProducts] = useState(undefined);
+  const { selectedCategories, setSelectedCategories } =
+    useContext(FilterContext);
 
-  const [filterShown, setFilterShown] = useState(true);
-  const [fetchedProducts, setFetchedProducts] = useState(undefined);
+  const router = useRouter();
+  const fetchedProducts = products;
 
-  function showFilters() {
-    setFilterShown(true);
+  function changeProductsOrder(e) {
+    setOrder(e.target.value);
   }
 
-  const getProducts = useCallback(async () => {
-    try {
-      const response = await fetch("/api/get-products/");
-      const products = await response.json();
-      setFetchedProducts([...products]);
-    } catch (error) {
-      //handle error
-    }
-  }, []);
+  const filteredByCat =
+    selectedCategories.length > 0
+      ? fetchedProducts.filter((item) =>
+          selectedCategories.includes(item.category)
+        )
+      : fetchedProducts;
 
-  useEffect(() => {
-    if (!fetchedProducts) {
-      getProducts();
-    }
-  }, [fetchedProducts, getProducts]);
+  console.log(filteredProducts);
+  console.log(selectedCategories);
+  console.log(fetchedProducts);
+
+  // const getProducts = useCallback(async () => {
+  //   try {
+  //     const response = await fetch("/api/get-products/");
+  //     const products = await response.json();
+  //     setFetchedProducts([...products]);
+  //   } catch (error) {
+  //     //handle error
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   if (!fetchedProducts) {
+  //     getProducts();
+  //   }
+  // }, [fetchedProducts, getProducts]);
 
   return (
-    <ProductsContext.Provider value={{ fetchedProducts, setFetchedProducts }}>
+    <ProductsContext.Provider value={fetchedProducts}>
       <Page padding={12}>
         <HStack
           borderColor="blue"
@@ -62,11 +98,11 @@ export default function Shop() {
 
               <HStack flexGrow="0">
                 <Text>Order by:</Text>
-                <Select>
-                  <option>Price: lowest first</option>
-                  <option>Price: higher first</option>
-                  <option>Name: A-Z</option>
-                  <option>Name: Z-A</option>
+                <Select onChange={changeProductsOrder}>
+                  <option value="lowest">Price: lowest first</option>
+                  <option value="highest">Price: highest first</option>
+                  <option value="a-z">Name: A-Z</option>
+                  <option value="z-a">Name: Z-A</option>
                 </Select>
               </HStack>
             </HStack>
@@ -77,9 +113,9 @@ export default function Shop() {
               gap={[8, 16]}
               w="100%"
             >
-              {fetchedProducts?.map((product, index) => {
-                return <SingleProduct product={product} key={index} />;
-              })}
+              {filteredByCat?.map((product, index) => (
+                <SingleProduct product={product} key={index} />
+              ))}
             </Grid>
           </VStack>
         </HStack>

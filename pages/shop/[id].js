@@ -21,7 +21,6 @@ export default function ProductPage({ product: fetchedProduct }) {
 
   // const [product, setProduct] = useState(undefined);
 
-  console.log(fetchedProduct);
   const product = fetchedProduct;
 
   // const { id } = router.query;

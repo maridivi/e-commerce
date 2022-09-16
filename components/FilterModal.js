@@ -9,6 +9,7 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
+import FilterBox from "./FilterBox";
 
 export default function FilterModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -19,15 +20,13 @@ export default function FilterModal() {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
-          <ModalBody></ModalBody>
+          <ModalBody>
+            <FilterBox />
+          </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            <Button variant="ghost">Reset Filters</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
