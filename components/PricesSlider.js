@@ -13,7 +13,7 @@ function PricesSlider({ sliderValue, onChange }) {
       <Text fontWeight="bold" fontSize="lg" mb="2">
         Price
       </Text>
-      <Text fontSize="md">0 - 500 </Text>
+      <Text fontSize="md">0 - 1000 </Text>
       <RangeSlider
         aria-label={["min", "max"]}
         min={0}

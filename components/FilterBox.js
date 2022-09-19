@@ -12,8 +12,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FilterContext } from "../pages/_app";
 
 export default function FilterBox({ isChecked, onChange }) {
-  const { selectedCategories, setSelectedCategories } =
-    useContext(FilterContext);
+  const {
+    selectedCategories,
+    setSelectedCategories,
+    sliderValue,
+    setSliderValue,
+  } = useContext(FilterContext);
 
   const [checkedState, setCheckedState] = useState(
     new Array(categories.length).fill(false)
@@ -26,6 +30,10 @@ export default function FilterBox({ isChecked, onChange }) {
 
     setCheckedState(updatedCheckedState);
   };
+
+  function handleSliderChange(value) {
+    setSliderValue(value);
+  }
 
   useEffect(() => {
     setSelectedCategories(
@@ -58,7 +66,7 @@ export default function FilterBox({ isChecked, onChange }) {
         })}
       </CheckboxGroup>
       <Box mt="30px">
-        <PricesSlider />
+        <PricesSlider onChange={handleSliderChange} sliderValue={sliderValue} />
       </Box>
     </Stack>
   );

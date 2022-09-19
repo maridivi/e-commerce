@@ -44,8 +44,14 @@ export default function Shop({ products }) {
   const [order, setOrder] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(undefined);
   // const [fetchedProducts, setFetchedProducts] = useState(undefined);
-  const { selectedCategories, setSelectedCategories } =
-    useContext(FilterContext);
+  const {
+    selectedCategories,
+
+    sliderValue,
+  } = useContext(FilterContext);
+
+  const minPrice = sliderValue[0];
+  const maxPrice = sliderValue[1];
 
   const router = useRouter();
   const fetchedProducts = products;
@@ -54,16 +60,38 @@ export default function Shop({ products }) {
     setOrder(e.target.value);
   }
 
-  const filteredByCat =
-    selectedCategories.length > 0
-      ? fetchedProducts.filter((item) =>
-          selectedCategories.includes(item.category)
-        )
-      : fetchedProducts;
+  // const filteredByCat =
+  //   selectedCategories.length > 0
+  //     ? fetchedProducts.filter(
+  //         (item) =>
+  //           selectedCategories.includes(item.category) &&
+  //           item.price >= sliderValue[0] &&
+  //           item.price <= sliderValue[1]
+  //       )
+  //     : fetchedProducts;
 
-  console.log(filteredProducts);
+  const shownProducts = (() => {
+    let res = [];
+    if (selectedCategories.length > 0) {
+      res = fetchedProducts.filter((item) =>
+        selectedCategories.includes(item.category)
+      );
+      console.log(res);
+    } else {
+      res = fetchedProducts;
+      console.log(res);
+    }
+    return res.filter(
+      (item) => item.price >= minPrice && item.price <= maxPrice
+    );
+  })();
   console.log(selectedCategories);
-  console.log(fetchedProducts);
+
+  console.log(shownProducts);
+
+  // const filteredByPrice = fetchedProducts.filter(
+  //   (item) => item.price >= sliderValue[0] && item.price <= sliderValue[1]
+  // );
 
   // const getProducts = useCallback(async () => {
   //   try {
@@ -113,7 +141,7 @@ export default function Shop({ products }) {
               gap={[8, 16]}
               w="100%"
             >
-              {filteredByCat?.map((product, index) => (
+              {shownProducts?.map((product, index) => (
                 <SingleProduct product={product} key={index} />
               ))}
             </Grid>
