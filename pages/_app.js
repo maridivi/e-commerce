@@ -11,7 +11,7 @@ export const FilterContext = createContext({
 
 function MyApp({ Component, pageProps }) {
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [sliderValue, setSliderValue] = useState([0, 300]);
+  const [sliderValue, setSliderValue] = useState([0, 1000]);
 
   return (
     <FilterContext.Provider

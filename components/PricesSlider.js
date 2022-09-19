@@ -1,5 +1,6 @@
 import {
   Box,
+  HStack,
   RangeSlider,
   RangeSliderFilledTrack,
   RangeSliderThumb,
@@ -13,7 +14,7 @@ function PricesSlider({ sliderValue, onChange }) {
       <Text fontWeight="bold" fontSize="lg" mb="2">
         Price
       </Text>
-      <Text fontSize="md">0 - 1000 </Text>
+      <Text color="blue.500">{`${sliderValue[0]}-${sliderValue[1]}`}</Text>
       <RangeSlider
         aria-label={["min", "max"]}
         min={0}
@@ -29,6 +30,10 @@ function PricesSlider({ sliderValue, onChange }) {
         <RangeSliderThumb index={0} />
         <RangeSliderThumb index={1} />
       </RangeSlider>
+      <HStack justify="space-between" width="200px">
+        <Text fontSize="md">0</Text>
+        <Text fontSize="md">1000 $</Text>
+      </HStack>
     </Box>
   );
 }

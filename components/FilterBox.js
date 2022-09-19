@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Checkbox,
   CheckboxGroup,
   Stack,
@@ -23,6 +24,12 @@ export default function FilterBox({ isChecked, onChange }) {
     new Array(categories.length).fill(false)
   );
 
+  function resetFilters() {
+    setSelectedCategories([]);
+    setSliderValue([0, 1000]);
+    setCheckedState(new Array(categories.length).fill(false));
+  }
+
   const handleCheckboxChange = (position) => {
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
@@ -34,6 +41,8 @@ export default function FilterBox({ isChecked, onChange }) {
   function handleSliderChange(value) {
     setSliderValue(value);
   }
+
+  console.log(checkedState);
 
   useEffect(() => {
     setSelectedCategories(
@@ -68,6 +77,9 @@ export default function FilterBox({ isChecked, onChange }) {
       <Box mt="30px">
         <PricesSlider onChange={handleSliderChange} sliderValue={sliderValue} />
       </Box>
+      <Button variant="solid" onClick={resetFilters}>
+        Reset Filters
+      </Button>
     </Stack>
   );
 }
