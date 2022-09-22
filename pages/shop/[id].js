@@ -1,8 +1,18 @@
-import { Button, Image, Stack, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  Image,
+  Select,
+  Stack,
+  Text,
+  useToast,
+  VStack,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Page from "../../components/Page";
+import { CartContext } from "../_app";
 
 export async function getServerSideProps(context) {
   const id = context.query.id;
@@ -17,31 +27,29 @@ export async function getServerSideProps(context) {
 }
 
 export default function ProductPage({ product: fetchedProduct }) {
+  const { setCartItems, cartItems } = useContext(CartContext);
   const router = useRouter();
+  const product = fetchedProduct;
+  const [quantity, setQuantity] = useState(0);
+  const toast = useToast();
 
   // const [product, setProduct] = useState(undefined);
 
-  const product = fetchedProduct;
+  function addProduct() {
+    setCartItems((currentItems) => [
+      ...currentItems,
+      { details: product, quantity: 1 },
+    ]);
+    toast({
+      title: "Product added to cart.",
+      description: "Go to cart to change quantity.",
+      status: "success",
+      duration: 7000,
+      isClosable: true,
+    });
+  }
 
-  // const { id } = router.query;
-
-  // useEffect(() => {
-  //   const getSingleProduct = async () => {
-  //     try {
-  //       if (!id) return;
-
-  //       const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-
-  //       const fetchedpPoduct = await response.json();
-  //       setProduct(fetchedpPoduct);
-  //     } catch (error) {
-  //       //handle error
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   getSingleProduct();
-  // }, [id]);
+  console.log(cartItems);
 
   return (
     <Page>
@@ -66,7 +74,8 @@ export default function ProductPage({ product: fetchedProduct }) {
           <Text>{product?.price}</Text>
 
           <Text>{product?.description}</Text>
-          <Button>Add to cart</Button>
+
+          <Button onClick={addProduct}>Add to cart</Button>
         </VStack>
       </Stack>
     </Page>

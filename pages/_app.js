@@ -9,9 +9,15 @@ export const FilterContext = createContext({
   setSliderValue: () => {},
 });
 
+export const CartContext = createContext({
+  cartItems: [],
+  setCartItems: () => {},
+});
+
 function MyApp({ Component, pageProps }) {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sliderValue, setSliderValue] = useState([0, 1000]);
+  const [cartItems, setCartItems] = useState([]);
 
   return (
     <FilterContext.Provider
@@ -22,9 +28,11 @@ function MyApp({ Component, pageProps }) {
         setSliderValue,
       }}
     >
-      <ChakraProvider>
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <CartContext.Provider value={{ cartItems, setCartItems }}>
+        <ChakraProvider>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </CartContext.Provider>
     </FilterContext.Provider>
   );
 }

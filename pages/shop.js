@@ -1,5 +1,4 @@
 import {
-  Button,
   Grid,
   HStack,
   Select,
@@ -9,13 +8,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useState } from "react";
 import FilterBox from "../components/FilterBox";
 import FilterModal from "../components/FilterModal";
 import Page from "../components/Page";
@@ -27,7 +20,6 @@ const ProductsContext = createContext({
 });
 
 export async function getServerSideProps(context) {
-  // const id = context.query.id;
   try {
     const products = (await axios.get("https://fakestoreapi.com/products"))
       .data;
@@ -41,9 +33,7 @@ export async function getServerSideProps(context) {
 export default function Shop({ products }) {
   const [isBiggerThan960] = useMediaQuery("(min-width: 960px)");
   const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
-  const [order, setOrder] = useState(null);
-  const [filteredProducts, setFilteredProducts] = useState(undefined);
-  // const [fetchedProducts, setFetchedProducts] = useState(undefined);
+  const [order, setOrder] = useState("a-z");
   const {
     selectedCategories,
 
@@ -60,55 +50,45 @@ export default function Shop({ products }) {
     setOrder(e.target.value);
   }
 
-  // const filteredByCat =
-  //   selectedCategories.length > 0
-  //     ? fetchedProducts.filter(
-  //         (item) =>
-  //           selectedCategories.includes(item.category) &&
-  //           item.price >= sliderValue[0] &&
-  //           item.price <= sliderValue[1]
-  //       )
-  //     : fetchedProducts;
-
   const shownProducts = (() => {
     let res = [];
     if (selectedCategories.length > 0) {
       res = fetchedProducts.filter((item) =>
         selectedCategories.includes(item.category)
       );
-      console.log(res);
     } else {
       res = fetchedProducts;
-      console.log(res);
     }
     return res.filter(
       (item) => item.price >= minPrice && item.price <= maxPrice
     );
   })();
-  console.log(selectedCategories);
 
-  console.log(shownProducts);
+  const sortedProducts = (() => {
+    let copyOfSortedProducts;
+    if (order === "a-z") {
+      copyOfSortedProducts = shownProducts.sort((a, b) => {
+        return a.title.localeCompare(b.title);
+      });
+    }
+    if (order === "z-a") {
+      copyOfSortedProducts = shownProducts.sort((a, b) => {
+        return b.title.localeCompare(a.title);
+      });
+    }
+    if (order === "lowest") {
+      copyOfSortedProducts = shownProducts.sort((a, b) => {
+        return a.price - b.price;
+      });
+    }
+    if (order === "highest") {
+      copyOfSortedProducts = shownProducts.sort((a, b) => {
+        return b.price - a.price;
+      });
+    }
 
-  // const filteredByPrice = fetchedProducts.filter(
-  //   (item) => item.price >= sliderValue[0] && item.price <= sliderValue[1]
-  // );
-
-  // const getProducts = useCallback(async () => {
-  //   try {
-  //     const response = await fetch("/api/get-products/");
-  //     const products = await response.json();
-  //     setFetchedProducts([...products]);
-  //   } catch (error) {
-  //     //handle error
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!fetchedProducts) {
-  //     getProducts();
-  //   }
-  // }, [fetchedProducts, getProducts]);
-
+    return copyOfSortedProducts;
+  })();
   return (
     <ProductsContext.Provider value={fetchedProducts}>
       <Page padding={12}>
@@ -141,7 +121,7 @@ export default function Shop({ products }) {
               gap={[8, 16]}
               w="100%"
             >
-              {shownProducts?.map((product, index) => (
+              {sortedProducts?.map((product, index) => (
                 <SingleProduct product={product} key={index} />
               ))}
             </Grid>

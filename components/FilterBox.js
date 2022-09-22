@@ -27,7 +27,7 @@ export default function FilterBox({ isChecked, onChange }) {
   function resetFilters() {
     setSelectedCategories([]);
     setSliderValue([0, 1000]);
-    setCheckedState(new Array(categories.length).fill(false));
+    setCheckedState(false);
   }
 
   const handleCheckboxChange = (position) => {
@@ -55,29 +55,35 @@ export default function FilterBox({ isChecked, onChange }) {
   }, [checkedState, setSelectedCategories]);
 
   return (
-    <Stack padding={6}>
-      <Text fontWeight="extrabold" fontSize="lg">
-        Categories
-      </Text>
-      <CheckboxGroup colorScheme="gray">
-        {categories.map((cat, index) => {
-          return (
-            <Checkbox
-              key={index}
-              value={cat}
-              name={cat}
-              onChange={() => handleCheckboxChange(index)}
-              isChecked={checkedState[index]}
-            >
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
-            </Checkbox>
-          );
-        })}
-      </CheckboxGroup>
-      <Box mt="30px">
-        <PricesSlider onChange={handleSliderChange} sliderValue={sliderValue} />
-      </Box>
-      <Button variant="solid" onClick={resetFilters}>
+    <Stack padding={6} gap={8}>
+      <Stack>
+        <Text fontWeight="extrabold" fontSize="lg">
+          Categories
+        </Text>
+        <CheckboxGroup colorScheme="gray">
+          {categories.map((cat, index) => {
+            return (
+              <Checkbox
+                key={index}
+                value={cat}
+                name={cat}
+                onChange={() => handleCheckboxChange(index)}
+                isChecked={checkedState[index]}
+              >
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </Checkbox>
+            );
+          })}
+        </CheckboxGroup>
+
+        <Box mt="30px">
+          <PricesSlider
+            onChange={handleSliderChange}
+            sliderValue={sliderValue}
+          />
+        </Box>
+      </Stack>
+      <Button variant="solid" onClick={resetFilters} width="100px" px={16}>
         Reset Filters
       </Button>
     </Stack>

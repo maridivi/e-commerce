@@ -18,8 +18,8 @@ function PricesSlider({ sliderValue, onChange }) {
       <RangeSlider
         aria-label={["min", "max"]}
         min={0}
-        max={300}
-        step={10}
+        max={1000}
+        step={100}
         onChange={onChange}
         value={sliderValue}
         w="200px"
