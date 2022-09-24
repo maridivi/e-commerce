@@ -1,6 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "../styles/globals.css";
+import useLocalStorage from "../utils/hooks/useLocalStorage";
 
 export const FilterContext = createContext({
   selectedCategories: [],
@@ -17,7 +18,17 @@ export const CartContext = createContext({
 function MyApp({ Component, pageProps }) {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sliderValue, setSliderValue] = useState([0, 1000]);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  // }, [cartItems]);
+  // useEffect(() => {
+  //   const items = JSON.parse(localStorage.getItem("cartItems"));
+  //   if (items) {
+  //     setCartItems(items);
+  //   }
+  // }, [setCartItems]);
 
   return (
     <FilterContext.Provider

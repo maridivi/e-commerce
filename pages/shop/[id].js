@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   HStack,
   Image,
@@ -9,6 +10,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import Page from "../../components/Page";
@@ -53,12 +55,22 @@ export default function ProductPage({ product: fetchedProduct }) {
 
   return (
     <Page>
+      <HStack>
+        <Link href="/shop">
+          <Button>Continue Shopping</Button>
+        </Link>
+        <Link href="/cart">
+          <Button>Go to cart</Button>
+        </Link>
+      </HStack>
+
       <Stack
         key={product?.id}
         direction={["column", "column", "row"]}
         gap={[4, 8, 16, 32, 64]}
         px={[4, 8, 16, 32, 64]}
         py={32}
+        border="solid"
       >
         <Image
           alt={product?.title}

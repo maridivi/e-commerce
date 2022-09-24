@@ -1,4 +1,6 @@
 import {
+  Box,
+  Button,
   HStack,
   Image,
   Input,
@@ -9,34 +11,77 @@ import {
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { CartContext } from "../pages/_app";
+import { FiTrash2 } from "react-icons/fi";
 
-export default function CartItem({ itemTitle, itemImg }) {
-  const { setCartItems, cartItems } = useContext(CartContext);
+export default function CartItem({ item }) {
+  const { quantity, details } = item;
+  const { image, title, price, id } = details;
+
+  const { setCartItems } = useContext(CartContext);
+
   const quantities = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   function handleQuantityChange(event) {
     const value = event.target.value;
-    setCartItems((prev) => {
-      return prev.map((cartItem) => {
-        if (cartItem.id === item.id) {
-          return { ...cartItem, quantity: value };
+    console.log({ value });
+    setCartItems((items) => {
+      return items.map((cartItem) => {
+        if (cartItem.details.id === id) {
+          return { ...cartItem, quantity: parseInt(value) };
         } else {
           return cartItem;
         }
       });
     });
   }
-  console.log(cartItems);
+
+  function removeProduct() {
+    setCartItems((items) => {
+      const isSelectedProduct = (product) => product.details.id === id;
+      const itemIndex = items.findIndex(isSelectedProduct);
+      const newItems = [...items];
+      newItems.splice(itemIndex, 1);
+      return newItems;
+    });
+  }
+
   return (
-    <Stack direction={["column", "row", "row"]}>
-      <Image alt={itemTitle} src={itemImg}></Image>
-      <Stack>
-        <Text>{itemTitle}</Text>
-        <Select onChange={handleQuantityChange}>
+    <Stack
+      direction={["column", "column", "row"]}
+      justify="space-between"
+      gap={[2, 4, 6, 8, 10, 12]}
+      align="center"
+      width="100%"
+    >
+      <Box width={64} border="solid" margin="0 auto">
+        <Image
+          alt={title}
+          src={image}
+          minHeight="0"
+          objectFit="contain"
+          maxHeight="200px"
+          margin="0 auto"
+        ></Image>
+      </Box>
+
+      <VStack
+        justify="center"
+        align="center"
+        border="solid"
+        width={["200", "300px", "400px"]}
+      >
+        <Text textAlign="center">{title}</Text>
+        <Text fontWeight="bold">{price}</Text>
+        <Select onChange={handleQuantityChange} width={16}>
           {quantities.map((q, i) => (
-            <option key={i}>{q}</option>
+            <option selected={q === quantity} key={i}>
+              {q}
+            </option>
           ))}
         </Select>
-      </Stack>
+      </VStack>
+      <Button onClick={removeProduct}>
+        <FiTrash2 />
+      </Button>
     </Stack>
   );
 }
