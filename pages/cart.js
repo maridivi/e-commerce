@@ -33,6 +33,9 @@ export default function Cart() {
           })}
         </Stack>
       )}
+      <Link href="/checkout">
+        <Button>Go to checkout</Button>
+      </Link>
     </Page>
   );
 }
