@@ -6,11 +6,13 @@ import {
   Stack,
   Text,
   Textarea,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import Page from "../components/Page";
 
 export default function ContactForm() {
+  const toast = useToast();
   return (
     <Page padding={36}>
       <VStack gap={6}>
@@ -30,7 +32,20 @@ export default function ContactForm() {
               <FormLabel mb="-1">Message</FormLabel>
               <Textarea></Textarea>
             </VStack>
-            <Button type="submit">Submit</Button>
+            <Button
+              onClick={() =>
+                toast({
+                  title: "Message sent!",
+                  description:
+                    "We will soon answer to your request if possible.",
+                  status: "success",
+                  duration: 4000,
+                  isClosable: true,
+                })
+              }
+            >
+              Submit
+            </Button>
           </VStack>
         </FormControl>
       </VStack>

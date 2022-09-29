@@ -5,6 +5,7 @@ import {
   List,
   ListItem,
   Spacer,
+  Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -31,31 +32,23 @@ export default function ReviewOrder() {
 
   const { cartItems } = useContext(CartContext);
 
-  const itemPrices = cartItems.map((item) => {
-    return item.details.price;
-  });
-
-  const initialValue = 0;
-  const subTotal = !itemPrices
-    ? 0
-    : itemPrices.reduce((prev, current) => {
-        return prev + current;
-      }, initialValue);
+  const subTotal = cartItems.reduce((prevPrice, item) => {
+    return prevPrice + item.details.price * item.quantity;
+  }, 0);
 
   return (
     <Page padding={16}>
       <Text fontSize="x-large" mb={12}>
         Review your order
       </Text>
-      <HStack
+      <Stack
         align="space-between"
         justify="space-around"
-        border="solid"
         width="100%"
         mt={16}
-        mb={12}
+        direction={["column", "row"]}
       >
-        <VStack border="solid">
+        <VStack mb={16}>
           <Text fontWeight="bold">Your personal data</Text>
           <List>
             <ListItem>{first_name}</ListItem>
@@ -80,7 +73,7 @@ export default function ReviewOrder() {
           <Divider />
           <Text>Total: {`${subTotal + 4.99} €`}</Text>
         </VStack>
-      </HStack>
+      </Stack>
       <Link href="/order_confirmation">
         <Button>Complete order</Button>
       </Link>

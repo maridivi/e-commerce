@@ -46,15 +46,13 @@ export default function ProductPage({ product: fetchedProduct }) {
       title: "Product added to cart.",
       description: "Go to cart to change quantity.",
       status: "success",
-      duration: 7000,
+      duration: 4000,
       isClosable: true,
     });
   }
 
-  console.log(cartItems);
-
   return (
-    <Page>
+    <Page padding={8}>
       <HStack>
         <Link href="/shop">
           <Button>Continue Shopping</Button>
@@ -70,7 +68,6 @@ export default function ProductPage({ product: fetchedProduct }) {
         gap={[4, 8, 16, 32, 64]}
         px={[4, 8, 16, 32, 64]}
         py={32}
-        border="solid"
       >
         <Image
           alt={product?.title}

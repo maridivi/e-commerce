@@ -4,50 +4,75 @@ import {
   FormLabel,
   Input,
   Stack,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { forwardRef, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import Page from "../components/Page";
 
 export default function CheckOut() {
   const [userData, setUserData] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    address: "",
-    state: "",
-    city: "",
-    zip_code: "",
-    card_number: "",
-    exp_date: "",
+    "First Name": "",
+    "Last Name": "",
+    Email: "",
+    "Street Address": "",
+    State: "",
+    City: "",
+    "Zip Code": "",
+    "Credit/Debit Card Number": "",
+    "Expiry Date": "",
   });
+
   const [isError, setIsError] = useState(false);
+  const router = useRouter();
+
+  function handleChange(e, key) {
+    setUserData({ ...userData, key: e.target.value });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (userData === "") {
+    if (
+      Object.values(userData).some(
+        (data) => data === null || data === undefined || data === ""
+      )
+    ) {
       setIsError(true);
-      return;
+    } else {
+      setIsError(false);
+
+      router.push({ pathname: "/order_review", query: userData });
     }
   }
 
   console.log(userData);
-  console.log(isError);
-
   return (
-    <Page>
-      <Stack direction={["column", "row"]}>
-        <FormControl isInvalid={isError}>
-          <VStack gap={2}>
-            <CustomInput
+    <Page padding={16}>
+      <Stack direction="column">
+        <FormControl
+          isRequired={isError === true && true}
+          onSubmit={handleSubmit}
+        >
+          <Stack gap={4}>
+            {Object.keys(userData).map((key, index) => (
+              <CustomInput
+                label={key}
+                key={index}
+                input={key.valueOf}
+                onChange={(e) =>
+                  setUserData({ ...userData, key: e.target.value })
+                }
+              />
+            ))}
+            {/* <CustomInput
               label="First Name"
               onChange={(e) =>
                 setUserData({ ...userData, first_name: e.target.value })
               }
-              isError={isError}
               input={userData.first_name}
             />
             <CustomInput
@@ -55,7 +80,6 @@ export default function CheckOut() {
               onChange={(e) =>
                 setUserData({ ...userData, last_name: e.target.value })
               }
-              isError={isError}
               input={userData.last_name}
             />
             <CustomInput
@@ -64,7 +88,6 @@ export default function CheckOut() {
               onChange={(e) =>
                 setUserData({ ...userData, email: e.target.value })
               }
-              isError={isError}
               input={userData.email}
             />
             <CustomInput
@@ -72,7 +95,6 @@ export default function CheckOut() {
               onChange={(e) =>
                 setUserData({ ...userData, address: e.target.value })
               }
-              isError={isError}
               input={userData.address}
             />
             <CustomInput
@@ -80,7 +102,6 @@ export default function CheckOut() {
               onChange={(e) =>
                 setUserData({ ...userData, state: e.target.value })
               }
-              isError={isError}
               input={userData.state}
             />
             <CustomInput
@@ -88,7 +109,6 @@ export default function CheckOut() {
               onChange={(e) =>
                 setUserData({ ...userData, city: e.target.value })
               }
-              isError={isError}
               input={userData.city}
             />
             <CustomInput
@@ -96,7 +116,6 @@ export default function CheckOut() {
               onChange={(e) =>
                 setUserData({ ...userData, zip_code: e.target.value })
               }
-              isError={isError}
               input={userData.zip_code}
             />
             <CustomInput
@@ -104,7 +123,6 @@ export default function CheckOut() {
               onChange={(e) =>
                 setUserData({ ...userData, card_number: e.target.value })
               }
-              isError={isError}
               input={userData.card_number}
               type="number"
             />
@@ -113,13 +131,18 @@ export default function CheckOut() {
               onChange={(e) =>
                 setUserData({ ...userData, exp_date: e.target.value })
               }
-              isError={isError}
               input={userData.exp_date}
-            />
-            <Link href={{ pathname: "/order_review", query: userData }}>
-              <Button type="submit">Review</Button>
-            </Link>
-          </VStack>
+            /> */}
+            {isError && (
+              <Text fontSize="xs" color="red.400">
+                *: fields required
+              </Text>
+            )}
+
+            <Button type="submit" width={32} mx="auto" onClick={handleSubmit}>
+              Review
+            </Button>
+          </Stack>
         </FormControl>
       </Stack>
     </Page>

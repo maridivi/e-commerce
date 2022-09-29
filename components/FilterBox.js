@@ -42,8 +42,6 @@ export default function FilterBox({ isChecked, onChange }) {
     setSliderValue(value);
   }
 
-  console.log(checkedState);
-
   useEffect(() => {
     setSelectedCategories(
       categories.filter((cat, index) => {

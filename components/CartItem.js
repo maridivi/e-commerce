@@ -22,7 +22,6 @@ export default function CartItem({ item }) {
   const quantities = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   function handleQuantityChange(event) {
     const value = event.target.value;
-    console.log({ value });
     setCartItems((items) => {
       return items.map((cartItem) => {
         if (cartItem.details.id === id) {
@@ -52,7 +51,7 @@ export default function CartItem({ item }) {
       align="center"
       width="100%"
     >
-      <Box width={64} border="solid" margin="0 auto">
+      <Box width={64} margin="0 auto">
         <Image
           alt={title}
           src={image}
@@ -63,12 +62,7 @@ export default function CartItem({ item }) {
         ></Image>
       </Box>
 
-      <VStack
-        justify="center"
-        align="center"
-        border="solid"
-        width={["200", "300px", "400px"]}
-      >
+      <VStack justify="center" align="center" width={["200", "300px", "400px"]}>
         <Text textAlign="center">{title}</Text>
         <Text fontWeight="bold">{price}</Text>
         <Select onChange={handleQuantityChange} width={16}>

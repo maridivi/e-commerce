@@ -8,8 +8,6 @@ import { CartContext } from "./_app";
 export default function Cart() {
   const { cartItems, setCartItems } = useContext(CartContext);
 
-  console.log(cartItems);
-
   return (
     <Page padding={8}>
       <Link href="/shop">
