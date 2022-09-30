@@ -1,9 +1,7 @@
 import {
   Box,
   Button,
-  HStack,
   Image,
-  Input,
   Select,
   Stack,
   Text,

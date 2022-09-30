@@ -20,15 +20,6 @@ import { useContext } from "react";
 import { CartContext } from "../pages/_app";
 
 export default function Header() {
-  const breakpoints = {
-    sm: "320px",
-    md: "768px",
-    lg: "960px",
-    xl: "1200px",
-    "2xl": "1536px",
-  };
-
-  const theme = extendTheme({ breakpoints });
   const [isSmallerThan550] = useMediaQuery("(max-width: 550px)");
   const { cartItems } = useContext(CartContext);
 

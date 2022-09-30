@@ -1,27 +1,22 @@
-import {
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Input,
-  Stack,
-  VStack,
-} from "@chakra-ui/react";
+import { FormLabel, Input, VStack } from "@chakra-ui/react";
 
 export default function CustomInput({
   label,
-  input,
+  value,
   onChange,
   type,
+  autoFocus,
   isError = false,
 }) {
-  //   const isInputError = isError;
   return (
     <VStack align="stretch" width="300px">
       <FormLabel mb="-1">{label}</FormLabel>
-      <Input onChange={onChange} value={input} type={type} />
-      {/* {isInputError === true && (
-        <FormErrorMessage>{`${label} is required.`}</FormErrorMessage>
-      )} */}
+      <Input
+        onChange={onChange}
+        value={value}
+        type={type}
+        autoFocus={autoFocus}
+      />
     </VStack>
   );
 }

@@ -4,13 +4,10 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useContext } from "react";
-import { FilterContext } from "../pages/_app";
+
 import FilterBox from "./FilterBox";
 
 export default function FilterModal() {

@@ -1,15 +1,6 @@
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Stack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import Link from "next/link";
+import { Button, FormControl, Stack, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { forwardRef, useState } from "react";
+import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import Page from "../components/Page";
 
@@ -30,7 +21,7 @@ export default function CheckOut() {
   const router = useRouter();
 
   function handleChange(e, key) {
-    setUserData({ ...userData, key: e.target.value });
+    setUserData({ ...userData, [e.name]: e.target.value });
   }
 
   function handleSubmit(e) {
@@ -62,77 +53,17 @@ export default function CheckOut() {
               <CustomInput
                 label={key}
                 key={index}
-                input={key.valueOf}
+                autoFocus={index === 0}
+                value={userData[key]}
                 onChange={(e) =>
-                  setUserData({ ...userData, key: e.target.value })
+                  setUserData((data) => ({
+                    ...data,
+                    [key]: e.target.value,
+                  }))
                 }
               />
             ))}
-            {/* <CustomInput
-              label="First Name"
-              onChange={(e) =>
-                setUserData({ ...userData, first_name: e.target.value })
-              }
-              input={userData.first_name}
-            />
-            <CustomInput
-              label="Last Name"
-              onChange={(e) =>
-                setUserData({ ...userData, last_name: e.target.value })
-              }
-              input={userData.last_name}
-            />
-            <CustomInput
-              label="Email address"
-              type="email"
-              onChange={(e) =>
-                setUserData({ ...userData, email: e.target.value })
-              }
-              input={userData.email}
-            />
-            <CustomInput
-              label="Street Address"
-              onChange={(e) =>
-                setUserData({ ...userData, address: e.target.value })
-              }
-              input={userData.address}
-            />
-            <CustomInput
-              label="State"
-              onChange={(e) =>
-                setUserData({ ...userData, state: e.target.value })
-              }
-              input={userData.state}
-            />
-            <CustomInput
-              label="City"
-              onChange={(e) =>
-                setUserData({ ...userData, city: e.target.value })
-              }
-              input={userData.city}
-            />
-            <CustomInput
-              label="Zip Code"
-              onChange={(e) =>
-                setUserData({ ...userData, zip_code: e.target.value })
-              }
-              input={userData.zip_code}
-            />
-            <CustomInput
-              label="Credit/Debit Card Number"
-              onChange={(e) =>
-                setUserData({ ...userData, card_number: e.target.value })
-              }
-              input={userData.card_number}
-              type="number"
-            />
-            <CustomInput
-              label="Expiration Date"
-              onChange={(e) =>
-                setUserData({ ...userData, exp_date: e.target.value })
-              }
-              input={userData.exp_date}
-            /> */}
+
             {isError && (
               <Text fontSize="xs" color="red.400">
                 *: fields required

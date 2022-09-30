@@ -5,20 +5,15 @@ import {
   CheckboxGroup,
   Stack,
   Text,
-  useCheckbox,
 } from "@chakra-ui/react";
 import PricesSlider from "./PricesSlider";
-import { categories, stars } from "../utils/filterData";
-import { createContext, useContext, useEffect, useState } from "react";
+import { categories } from "../utils/filterData";
+import { useContext, useEffect, useState } from "react";
 import { FilterContext } from "../pages/_app";
 
-export default function FilterBox({ isChecked, onChange }) {
-  const {
-    selectedCategories,
-    setSelectedCategories,
-    sliderValue,
-    setSliderValue,
-  } = useContext(FilterContext);
+export default function FilterBox() {
+  const { setSelectedCategories, sliderValue, setSliderValue } =
+    useContext(FilterContext);
 
   const [checkedState, setCheckedState] = useState(
     new Array(categories.length).fill(false)

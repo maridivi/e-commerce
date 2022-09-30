@@ -1,9 +1,7 @@
 import {
-  Box,
   Button,
   HStack,
   Image,
-  Select,
   Stack,
   Text,
   useToast,
@@ -12,7 +10,7 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import Page from "../../components/Page";
 import { CartContext } from "../_app";
 
@@ -29,13 +27,10 @@ export async function getServerSideProps(context) {
 }
 
 export default function ProductPage({ product: fetchedProduct }) {
-  const { setCartItems, cartItems } = useContext(CartContext);
+  const { setCartItems } = useContext(CartContext);
   const router = useRouter();
   const product = fetchedProduct;
-  const [quantity, setQuantity] = useState(0);
   const toast = useToast();
-
-  // const [product, setProduct] = useState(undefined);
 
   function addProduct() {
     setCartItems((currentItems) => [

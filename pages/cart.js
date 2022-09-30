@@ -1,6 +1,6 @@
-import { Button, HStack, Image, Stack, Text, VStack } from "@chakra-ui/react";
+import { Button, Stack, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import CartItem from "../components/CartItem";
 import Page from "../components/Page";
 import { CartContext } from "./_app";
@@ -32,7 +32,7 @@ export default function Cart() {
         </Stack>
       )}
       <Link href="/checkout">
-        <Button>Go to checkout</Button>
+        <Button variant="primary">Go to checkout</Button>
       </Link>
     </Page>
   );

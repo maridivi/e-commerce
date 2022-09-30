@@ -17,6 +17,7 @@ export default function Page({
         padding={padding}
         alignContent={alignContent}
         justify={justifyContent}
+        flex={1}
       >
         {children}
       </VStack>

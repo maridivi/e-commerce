@@ -1,10 +1,8 @@
 import {
   Button,
   Divider,
-  HStack,
   List,
   ListItem,
-  Spacer,
   Stack,
   Text,
   VStack,

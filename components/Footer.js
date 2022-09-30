@@ -1,9 +1,8 @@
-import { HStack, Icon, Stack, Text, VStack, Link } from "@chakra-ui/react";
+import { HStack, Icon, Text, VStack, Link } from "@chakra-ui/react";
 import NextLink from "./NextLink";
 import { GiBowTie } from "react-icons/gi";
 import {
   AiOutlineInstagram,
-  AiOutlineFacebook,
   AiFillFacebook,
   AiOutlineTwitter,
 } from "react-icons/ai";
