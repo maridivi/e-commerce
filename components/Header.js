@@ -1,8 +1,6 @@
 import {
-  Avatar,
-  AvatarBadge,
-  extendTheme,
   HStack,
+  Icon,
   IconButton,
   Link,
   Menu,
@@ -67,19 +65,42 @@ export default function Header() {
           </HStack>
         )}
         <NextLink href="/cart">
-          <Avatar
-            icon={<AiOutlineShoppingCart cursor="pointer" />}
-            bg="transparent"
-            padding="0"
-            fontSize="xl"
-            size="sm"
-          >
-            <AvatarBadge borderColor="transparent">
-              <Text fontSize="sm" fontWeight="bold">
+          <Stack flex={1} alignItems="center" justifyContent="center">
+            <Icon
+              as={AiOutlineShoppingCart}
+              boxSize={7}
+              cursor="pointer"
+              position="relative"
+              mx={-1}
+            />
+            <Stack
+              style={{
+                position: "absolute",
+                backgroundColor: "",
+                border: "solid",
+                width: 20,
+                height: 20,
+                borderRadius: "100%",
+                right: 10,
+                top: +10,
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 2,
+              }}
+              backgroundColor="pink.600"
+            >
+              <Text
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#FFFFFF",
+                  fontSize: 10,
+                }}
+              >
                 {cartItemsAmount}
               </Text>
-            </AvatarBadge>
-          </Avatar>
+            </Stack>
+          </Stack>
         </NextLink>
       </HStack>
     </Stack>
