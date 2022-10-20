@@ -54,8 +54,12 @@ export default function Header() {
               icon={<GiHamburgerMenu size={24} />}
             />
             <MenuList>
-              <MenuItem>Shop</MenuItem>
-              <MenuItem>Contact</MenuItem>
+              <NextLink href="/shop">
+                <MenuItem>Shop</MenuItem>
+              </NextLink>
+              <NextLink href="/contact">
+                <MenuItem>Contact</MenuItem>
+              </NextLink>
             </MenuList>
           </Menu>
         ) : (

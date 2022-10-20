@@ -7,7 +7,6 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useRouter } from "next/router";
 import { createContext, useContext, useState } from "react";
 import FilterBox from "../components/FilterBox";
 import FilterModal from "../components/FilterModal";
@@ -19,7 +18,7 @@ const ProductsContext = createContext({
   fetchedProducts: undefined,
 });
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   try {
     const products = (await axios.get("https://fakestoreapi.com/products"))
       .data;
@@ -43,7 +42,6 @@ export default function Shop({ products }) {
   const minPrice = sliderValue[0];
   const maxPrice = sliderValue[1];
 
-  const router = useRouter();
   const fetchedProducts = products;
 
   function changeProductsOrder(e) {
@@ -105,7 +103,7 @@ export default function Shop({ products }) {
               {isSmallerThan960 && <FilterModal />}
 
               <HStack flexGrow="0">
-                <Text>Order by:</Text>
+                <Text whiteSpace="nowrap">Order by:</Text>
                 <Select onChange={changeProductsOrder}>
                   <option value="lowest">Price: lowest first</option>
                   <option value="highest">Price: highest first</option>
