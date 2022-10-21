@@ -18,13 +18,14 @@ export default function Footer() {
       padding={10}
       bottom="0"
       width="100%"
-      bgColor="pink.100"
+      bgGradient="linear(to-t, #FAF7F0, white)"
       flexGrow={0}
       minHeight={0}
       gap={6}
+      color="gray.700"
     >
       <HStack justify="space-evenly" align="center" width="100%">
-        <VStack>
+        <VStack align="flex-start">
           <NextLink href="/shop">Shop</NextLink>
           <NextLink href="/contact">Contact</NextLink>
           <NextLink href="/cart">Cart</NextLink>

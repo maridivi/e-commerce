@@ -32,26 +32,29 @@ export default function Header() {
       display="flex"
       direction="row"
       justify="space-between"
-      height="20"
+      height="16"
       padding="6"
       width="100%"
       align="center"
       position="sticky"
       top="0"
-      bgColor="pink.100"
       zIndex={10}
+      color="gray.900"
+      bgGradient="linear(to-b, #FAF7F0, white)"
     >
       <NextLink href="/">
-        <Link fontSize={28}>HOME</Link>
+        <Link fontSize={22} fontFamily="lora, serif">
+          HOME
+        </Link>
       </NextLink>
-      <HStack>
+      <HStack gap={[2, 4, 6, 8]}>
         {isSmallerThan550 ? (
           <Menu>
             <MenuButton
               variant="ghost"
               as={IconButton}
               aria-label="Options"
-              icon={<GiHamburgerMenu size={24} />}
+              icon={<GiHamburgerMenu size={24} color="black" />}
             />
             <MenuList>
               <NextLink href="/shop">
@@ -63,7 +66,7 @@ export default function Header() {
             </MenuList>
           </Menu>
         ) : (
-          <HStack>
+          <HStack gap={[2, 4, 6, 8]}>
             <NextLink href="/shop">Shop</NextLink>
             <NextLink href="/contact">Contact</NextLink>
           </HStack>
@@ -79,19 +82,19 @@ export default function Header() {
             />
             <Stack
               style={{
-                position: "absolute",
-                backgroundColor: "",
-                border: "solid",
                 width: 20,
                 height: 20,
-                borderRadius: "100%",
-                right: 10,
-                top: +10,
+
+                right: 11,
+                top: 5,
                 alignItems: "center",
                 justifyContent: "center",
                 zIndex: 2,
               }}
-              backgroundColor="pink.600"
+              backgroundColor="pink.300"
+              position="absolute"
+              border="solid"
+              borderRadius="100%"
             >
               <Text
                 style={{

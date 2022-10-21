@@ -14,7 +14,7 @@ export default function ContactForm() {
   const toast = useToast();
   return (
     <Page padding={36}>
-      <VStack gap={6}>
+      <VStack gap={6} fontFamily="Inter">
         <Text fontSize={32}>Contact us</Text>
         <FormControl>
           <VStack gap={2}>

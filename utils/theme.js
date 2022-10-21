@@ -1,16 +1,10 @@
 import { extendTheme } from "@chakra-ui/react";
 
-// const theme = extendTheme({
-//   components: {
-//     Button: {
-//       variants: {
-//         primary: {
-//           bg: "pink.400",
-//           color: "white",
-//         },
-//       },
-//     },
-//   },
-// });
+const theme = extendTheme({
+  fonts: {
+    heading: `'Lora', serif`,
+    body: `'Inter', sans-serif`,
+  },
+});
 
-// export default theme;
+export default theme;
