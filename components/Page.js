@@ -9,7 +9,7 @@ export default function Page({
   justifyContent,
 }) {
   return (
-    <VStack minHeight="100vh" backgroundColor="white">
+    <VStack minHeight="100vh">
       <Header />
       <VStack
         minH="100%"

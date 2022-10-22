@@ -90,21 +90,16 @@ export default function Shop({ products }) {
   return (
     <ProductsContext.Provider value={fetchedProducts}>
       <Page padding={12}>
-        <HStack
-          borderColor="blue"
-          width="100%"
-          alignItems="flex-start"
-          gap={[2]}
-        >
+        <HStack borderColor="blue" width="100%" alignItems="flex-start" gap={2}>
           {isBiggerThan960 && <FilterBox />}
 
-          <VStack w="100%">
+          <VStack w="100%" gap={8}>
             <HStack justify="space-between" width="100%">
               {isSmallerThan960 && <FilterModal />}
 
               <HStack flexGrow="0">
                 <Text whiteSpace="nowrap">Order by:</Text>
-                <Select onChange={changeProductsOrder}>
+                <Select onChange={changeProductsOrder} color="gray.700">
                   <option value="lowest">Price: lowest first</option>
                   <option value="highest">Price: highest first</option>
                   <option value="a-z">Name: A-Z</option>

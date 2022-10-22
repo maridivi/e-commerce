@@ -1,4 +1,4 @@
-import { Image, Text, VStack } from "@chakra-ui/react";
+import { Image, Stack, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 
 export default function SingleProduct({ product }) {
@@ -6,8 +6,7 @@ export default function SingleProduct({ product }) {
 
   return (
     <Link href={{ pathname: "shop/[id]", query: { id: id } }}>
-      <VStack
-        borderColor="red"
+      <Stack
         align="center"
         justify="space-between"
         height="250px"
@@ -29,7 +28,7 @@ export default function SingleProduct({ product }) {
           </Text>
           <Text>{price}</Text>
         </VStack>
-      </VStack>
+      </Stack>
     </Link>
   );
 }

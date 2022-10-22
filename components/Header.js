@@ -40,7 +40,8 @@ export default function Header() {
       top="0"
       zIndex={10}
       color="gray.900"
-      bgGradient="linear(to-b, #FAF7F0, white)"
+      // bgGradient="linear(to-b, #FAF7F0, white)"
+      bgColor="rgb(251 247 243)"
     >
       <NextLink href="/">
         <Link fontSize={22} fontFamily="lora, serif">

@@ -18,7 +18,8 @@ export default function Footer() {
       padding={10}
       bottom="0"
       width="100%"
-      bgGradient="linear(to-t, #FAF7F0, white)"
+      // bgGradient="linear(to-t, #FAF7F0, white)"
+      bgColor="rgb(251 247 243)"
       flexGrow={0}
       minHeight={0}
       gap={6}
