@@ -55,12 +55,45 @@ export default function ProductPage({ product: fetchedProduct }) {
     return cartItems.find((item) => item.details.id === product.id);
   })();
 
+  console.log(addedProduct);
+
   function handleQuantityChange(event) {
     const value = event.target.value;
     setCartItems((items) => {
       return items.map((cartItem) => {
-        if (cartItem.details.id === id) {
+        if (cartItem.details.id === product.id) {
           return { ...cartItem, quantity: parseInt(value) };
+        } else {
+          return cartItem;
+        }
+      });
+    });
+  }
+
+  function increaseQuantity() {
+    setCartItems((items) => {
+      return items.map((cartItem) => {
+        if (cartItem.details.id === product.id && addedProduct.quantity < 10) {
+          return { ...cartItem, quantity: addedProduct.quantity + 1 };
+        } else {
+          toast({
+            title: "You have reached maximum quantity!",
+
+            status: "warning",
+            duration: 4000,
+            isClosable: true,
+          });
+          return cartItem;
+        }
+      });
+    });
+  }
+
+  function decreaseQuantity() {
+    setCartItems((items) => {
+      return items.map((cartItem) => {
+        if (cartItem.details.id === product.id && addedProduct.quantity > 0) {
+          return { ...cartItem, quantity: addedProduct.quantity - 1 };
         } else {
           return cartItem;
         }
@@ -108,9 +141,13 @@ export default function ProductPage({ product: fetchedProduct }) {
           <HStack>
             {isAdded ? (
               <HStack border="solid" borderRadius="5px">
-                <Button variant="unstyled">-</Button>
+                <Button variant="unstyled" onClick={decreaseQuantity}>
+                  -
+                </Button>
                 <Text>{addedProduct.quantity}</Text>
-                <Button variant="unstyled">+</Button>
+                <Button variant="unstyled" onClick={increaseQuantity}>
+                  +
+                </Button>
               </HStack>
             ) : (
               <Select onChange={handleQuantityChange} width={16}>
