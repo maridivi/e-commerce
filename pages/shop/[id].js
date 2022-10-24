@@ -51,9 +51,9 @@ export default function ProductPage({ product: fetchedProduct }) {
     });
   }
 
-  console.log(quantity);
-  console.log(product);
-  console.log(cartItems);
+  const addedProduct = (() => {
+    return cartItems.find((item) => item.details.id === product.id);
+  })();
 
   function handleQuantityChange(event) {
     const value = event.target.value;
@@ -107,10 +107,10 @@ export default function ProductPage({ product: fetchedProduct }) {
 
           <HStack>
             {isAdded ? (
-              <HStack>
-                <Button>-</Button>
-                <Text>{quantity}</Text>
-                <Button>+</Button>
+              <HStack border="solid" borderRadius="5px">
+                <Button variant="unstyled">-</Button>
+                <Text>{addedProduct.quantity}</Text>
+                <Button variant="unstyled">+</Button>
               </HStack>
             ) : (
               <Select onChange={handleQuantityChange} width={16}>
@@ -121,7 +121,9 @@ export default function ProductPage({ product: fetchedProduct }) {
             )}
 
             {isAdded ? (
-              <Button width="150px">View cart</Button>
+              <Link href="/cart">
+                <Button width="150px">View cart</Button>
+              </Link>
             ) : (
               <Button onClick={addProduct} width="150px">
                 Add to cart
