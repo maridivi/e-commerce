@@ -8,27 +8,25 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useContext } from "react";
 import Page from "../components/Page";
-import { CartContext } from "./_app";
+import { CartContext, UserContext } from "./_app";
 
 export default function ReviewOrder() {
-  const router = useRouter();
-  const query = router.query;
-  const {
-    first_name,
-    last_name,
-    email,
-    address,
-    city,
-    state,
-    zip_code,
-    card_number,
-    exp_date,
-  } = query;
-
+  const { userData } = useContext(UserContext);
   const { cartItems } = useContext(CartContext);
+
+  const {
+    "First Name": firstName,
+    "Last Name": lastName,
+    Email: email,
+    "Street Address": address,
+    City: city,
+    State: state,
+    "Zip Code": zip_code,
+    "Credit/Debit Card Number": card_number,
+    "Expiry Date": exp_date,
+  } = userData;
 
   const subTotal = cartItems.reduce((prevPrice, item) => {
     return prevPrice + item.details.price * item.quantity;
@@ -49,8 +47,8 @@ export default function ReviewOrder() {
         <VStack mb={16}>
           <Text fontWeight="bold">Your personal data</Text>
           <List>
-            <ListItem>{first_name}</ListItem>
-            <ListItem>{last_name}</ListItem>
+            <ListItem>{firstName}</ListItem>
+            <ListItem>{lastName}</ListItem>
             <ListItem>{email}</ListItem>
           </List>
           <Text fontWeight="bold">Your Shipping details</Text>
@@ -69,7 +67,7 @@ export default function ReviewOrder() {
           <Text>Subtotal: {`${subTotal} €`} </Text>
           <Text>Shipping: 4.99 €</Text>
           <Divider />
-          <Text>Total: {`${subTotal + 4.99} €`}</Text>
+          <Text>Total: {`${Round(subTotal + 4.99)} €`}</Text>
         </VStack>
       </Stack>
       <Link href="/order_confirmation">
@@ -77,4 +75,8 @@ export default function ReviewOrder() {
       </Link>
     </Page>
   );
+}
+
+function Round(num) {
+  return Math.round(num * 100) / 100;
 }
