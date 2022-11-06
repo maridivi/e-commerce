@@ -105,7 +105,7 @@ export default function ProductPage({ product: fetchedProduct }) {
     <Page padding={8}>
       <HStack>
         <Link href="/shop">
-          <Button>Continue Shopping</Button>
+          <Button> Continue Shopping</Button>
         </Link>
         <Link href="/cart">
           <Button>Go to cart</Button>
@@ -115,11 +115,12 @@ export default function ProductPage({ product: fetchedProduct }) {
       <Stack
         direction={["column", "column", "row"]}
         key={product?.id}
-        gap={[4, 8, 16, 32]}
+        gap={[4, 8, 16]}
         px={[4, 8]}
-        py={32}
+        py={20}
         width="100%"
         mx="0 auto"
+        mb="100px"
       >
         <Image
           alt={product?.title}
@@ -129,14 +130,15 @@ export default function ProductPage({ product: fetchedProduct }) {
           maxHeight="300px"
           mx="0 auto"
           width={["100%", "100%", "50%"]}
+          borderRadius="20px"
+          padding={4}
+          boxShadow="md"
         />
-        <VStack gap={4} width={["100%", "100%", "50%"]} align="star">
-          <Text fontSize="xl" fontWeight="bold">
+        <VStack gap={14} width={["100%", "100%", "50%"]} align="star">
+          <Text fontSize="2xl" fontWeight="bold">
             {product?.title}
           </Text>
-          <Text>{product?.price} €</Text>
-
-          <Text>{product?.description}</Text>
+          <Text fontSize="lg">{product?.price} €</Text>
 
           <HStack>
             {isAdded ? (
@@ -159,15 +161,27 @@ export default function ProductPage({ product: fetchedProduct }) {
 
             {isAdded ? (
               <Link href="/cart">
-                <Button width="150px">View cart</Button>
+                <Button width="150px" backgroundColor="pink.200">
+                  View cart
+                </Button>
               </Link>
             ) : (
-              <Button onClick={addProduct} width="150px">
+              <Button
+                onClick={addProduct}
+                width="150px"
+                backgroundColor="pink.200"
+              >
                 Add to cart
               </Button>
             )}
           </HStack>
         </VStack>
+      </Stack>
+      <Stack px={[4, 8]}>
+        <Text fontWeight="bold" fontSize="xl" mt={6}>
+          About the product
+        </Text>
+        <Text>{product?.description}</Text>
       </Stack>
     </Page>
   );

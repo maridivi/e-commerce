@@ -9,31 +9,35 @@ export default function Cart() {
   const { cartItems, setCartItems } = useContext(CartContext);
 
   return (
-    <Page padding={8}>
-      <Link href="/shop">
-        <Button>Continue Shopping</Button>
-      </Link>
-
-      {!cartItems ? (
+    <Page>
+      {cartItems.length === 0 ? (
         <VStack>
           <Text>Your cart is empty! </Text>
-          <Button>Go to the shop</Button>
+          <Link href="/shop">
+            <Button>Go to the shop</Button>
+          </Link>
         </VStack>
       ) : (
         <Stack
           direction="column"
           gap={[4, 8, 16]}
           px={[4, 8, 16, 32, 64]}
-          py={32}
+          py={24}
+          align="center"
         >
+          <Link href="/shop">
+            <Button width="200px">Continue Shopping</Button>
+          </Link>
           {cartItems.map((item, index) => {
             return <CartItem key={index} item={item} />;
           })}
+          <Link href="/checkout">
+            <Button variant="primary" backgroundColor="pink.200" width="200px">
+              Go to checkout
+            </Button>
+          </Link>
         </Stack>
       )}
-      <Link href="/checkout">
-        <Button variant="primary">Go to checkout</Button>
-      </Link>
     </Page>
   );
 }
