@@ -15,14 +15,14 @@ export default function FilterBox() {
   const { setSelectedCategories, sliderValue, setSliderValue } =
     useContext(FilterContext);
 
-  const [checkedState, setCheckedState] = useState(
-    new Array(categories.length).fill(false)
-  );
+  const defaultCheckedStates = new Array(categories.length).fill(false);
+
+  const [checkedState, setCheckedState] = useState(defaultCheckedStates);
 
   function resetFilters() {
     setSelectedCategories([]);
     setSliderValue([0, 1000]);
-    setCheckedState(false);
+    setCheckedState(defaultCheckedStates);
   }
 
   const handleCheckboxChange = (position) => {
@@ -54,16 +54,15 @@ export default function FilterBox() {
           Categories
         </Text>
         <CheckboxGroup colorScheme="gray">
-          {categories.map((cat, index) => {
+          {categories.map((category, index) => {
             return (
               <Checkbox
                 key={index}
-                value={cat}
-                name={cat}
+                name={category}
                 onChange={() => handleCheckboxChange(index)}
                 isChecked={checkedState[index]}
               >
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                {category.charAt(0).toUpperCase() + category.slice(1)}
               </Checkbox>
             );
           })}

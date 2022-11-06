@@ -15,7 +15,9 @@ export default function FilterModal() {
 
   return (
     <>
-      <Button onClick={onOpen}>Show filters</Button>
+      <Button onClick={onOpen} backgroundColor="pink.200">
+        Show filters
+      </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
