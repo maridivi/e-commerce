@@ -10,6 +10,7 @@ export default function CustomInput({
   minLength,
   min,
   isValid,
+  errorMessage,
 }) {
   return (
     <VStack align="stretch" width="300px">
@@ -31,7 +32,7 @@ export default function CustomInput({
       />
       {isValid && (
         <Text fontSize="xs" color="red.400">
-          field required
+          {errorMessage}
         </Text>
       )}
     </VStack>
