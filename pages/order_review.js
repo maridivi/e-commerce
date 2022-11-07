@@ -47,19 +47,23 @@ export default function ReviewOrder() {
         <VStack mb={16}>
           <Text fontWeight="bold">Your personal data</Text>
           <List>
-            <ListItem>{firstName}</ListItem>
-            <ListItem>{lastName}</ListItem>
-            <ListItem>{email}</ListItem>
+            <ListItem>{firstName.value}</ListItem>
+            <ListItem>{lastName.value}</ListItem>
+            <ListItem>{email.value}</ListItem>
           </List>
           <Text fontWeight="bold">Your Shipping details</Text>
           <List>
-            <ListItem>{address}</ListItem>
-            <ListItem>{city + " " + state + " " + zip_code}</ListItem>
+            <ListItem>{address.value}</ListItem>
+            <ListItem>
+              {city.value + " " + state.value + " " + zip_code.value}
+            </ListItem>
           </List>
           <Text fontWeight="bold">Your payment details</Text>
           <List>
-            <ListItem>XXXX-XXXX-XXXX-{card_number?.substring(12)}</ListItem>
-            <ListItem>{exp_date}</ListItem>
+            <ListItem>
+              XXXX-XXXX-XXXX-{card_number.value.substring(12)}
+            </ListItem>
+            <ListItem>{exp_date.value}</ListItem>
           </List>
         </VStack>
         <VStack>

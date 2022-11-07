@@ -26,7 +26,6 @@ export default function CheckOut() {
   const city = getInputValue("City");
   const zipCode = getInputValue("Zip Code");
   const cardNumber = getInputValue("Credit/Debit Card Number");
-  const expDate = getInputValue("Expiry Date");
 
   function handleChange(e) {
     setUserData((userData) => ({
@@ -40,13 +39,11 @@ export default function CheckOut() {
   }
 
   function validateForm() {
-    console.log(fname);
     if (fname.inputName.match(/\d/)) {
       setUserData((userData) => ({
         ...userData,
         [fname.key]: {
           ...userData[fname.key],
-          // value: e.target.value,
           errorMessage: "Enter a valid first name",
         },
       }));
@@ -56,7 +53,6 @@ export default function CheckOut() {
         ...userData,
         [lname.key]: {
           ...userData[lname.key],
-          // value: e.target.value,
           errorMessage: "Enter a valid last name",
         },
       }));
@@ -68,7 +64,6 @@ export default function CheckOut() {
         ...userData,
         [email.key]: {
           ...userData[email.key],
-          // value: e.target.value,
           errorMessage: "Enter a valid email",
         },
       }));
@@ -78,7 +73,6 @@ export default function CheckOut() {
         ...userData,
         [address.key]: {
           ...userData[address.key],
-          // value: e.target.value,
           errorMessage: "Enter a valid address",
         },
       }));
@@ -88,7 +82,6 @@ export default function CheckOut() {
         ...userData,
         [city.key]: {
           ...userData[city.key],
-          // value: e.target.value,
           errorMessage: "Enter a valid city",
         },
       }));
@@ -98,17 +91,15 @@ export default function CheckOut() {
         ...userData,
         [state.key]: {
           ...userData[state.key],
-          // value: e.target.value,
           errorMessage: "Enter a valid state",
         },
       }));
     }
-    if (zipCode.inputName.match("[a-zA-z]")) {
+    if (zipCode.inputName.match(/[a-zA-z]/)) {
       setUserData((userData) => ({
         ...userData,
         [zipCode.key]: {
           ...userData[zipCode.key],
-          // value: e.target.value,
           errorMessage: "Enter a valid zip code",
         },
       }));
@@ -118,7 +109,6 @@ export default function CheckOut() {
         ...userData,
         [cardNumber.key]: {
           ...userData[cardNumber.key],
-          // value: e.target.value,
           errorMessage: "Enter a valid card number",
         },
       }));
@@ -128,7 +118,7 @@ export default function CheckOut() {
   function handleSubmit(e) {
     e.preventDefault();
     validateForm();
-
+    console.log(userData);
     let canProceed = true;
 
     Object.entries(userData).forEach(([key, data]) => {
@@ -143,6 +133,7 @@ export default function CheckOut() {
         }));
       }
     });
+
     console.log(canProceed);
 
     if (!canProceed) return;

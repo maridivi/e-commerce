@@ -76,11 +76,10 @@ const defaultFormData = {
     value: "",
     type: "text",
     minLength: "2",
-    title: "City should be at least 2 digits long.",
   },
   "Zip Code": {
     value: "",
-    type: "number",
+
     minLength: "5",
     maxLength: "12",
   },
@@ -92,7 +91,7 @@ const defaultFormData = {
   },
   "Expiry Date": {
     value: "",
-    type: "date",
+    type: "month",
   },
 };
 
