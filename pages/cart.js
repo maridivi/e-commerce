@@ -11,8 +11,10 @@ export default function Cart() {
   return (
     <Page>
       {cartItems.length === 0 ? (
-        <VStack>
-          <Text>Your cart is empty! </Text>
+        <VStack paddingTop={24} gap={8}>
+          <Text fontSize={24} fontWeight="semibold">
+            Your cart is empty!{" "}
+          </Text>
           <Link href="/shop">
             <Button>Go to the shop</Button>
           </Link>

@@ -44,7 +44,7 @@ export default function ReviewOrder() {
         mt={16}
         direction={["column", "row"]}
       >
-        <VStack mb={16}>
+        <VStack mb={16} align="left">
           <Text fontWeight="bold">Your personal data</Text>
           <List>
             <ListItem>{firstName.value}</ListItem>
@@ -66,7 +66,7 @@ export default function ReviewOrder() {
             <ListItem>{exp_date.value}</ListItem>
           </List>
         </VStack>
-        <VStack>
+        <VStack align="left">
           <Text fontWeight="bold">Order Summary</Text>
           <Text>Subtotal: {`${subTotal} €`} </Text>
           <Text>Shipping: 4.99 €</Text>
