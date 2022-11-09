@@ -1,22 +1,3 @@
-// import axios from "axios";
-// import allowCors from "../../utils/allowCors";
-
-// const handler = (request, response) => {
-//   // const { limit } = request.body;
-
-//   axios
-//     .get("https://fakestoreapi.com/products")
-//     .then((res) => {
-//       response.json(res.data);
-//     })
-//     .catch((err) => {
-//       console.log({ err });
-//       response.status(400);
-//     });
-// };
-
-// export default allowCors(handler);
-
 const Airtable = require("airtable");
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
   process.env.AIRTABLE_BASE_ID
@@ -25,7 +6,12 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
 const table = base(process.env.AIRTABLE_TABLE_NAME);
 
 export default async function getProducts(req, res) {
-  const records = await table.select({}).all();
+  const records = await table
+    .select({
+      maxRecords: 100,
+      view: "All furniture",
+    })
+    .all();
 
   const products = records.map((record) => ({
     title: record.fields.Name,

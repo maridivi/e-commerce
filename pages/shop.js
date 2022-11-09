@@ -27,7 +27,6 @@ export async function getServerSideProps() {
     const products = (await vercelApi.get("/api/products")).data;
     return { props: { products } };
   } catch (err) {
-    console.error(err);
     return { props: {} };
   }
 }
@@ -36,20 +35,16 @@ export default function Shop({ products }) {
   const [isBiggerThan960] = useMediaQuery("(min-width: 960px)");
   const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
   const [order, setOrder] = useState("a-z");
-  const {
-    selectedCategories,
-
-    sliderValue,
-  } = useContext(FilterContext);
+  const { selectedCategories, sliderValue } = useContext(FilterContext);
 
   const minPrice = sliderValue[0];
   const maxPrice = sliderValue[1];
 
-  console.log(products);
-
   function changeProductsOrder(e) {
     setOrder(e.target.value);
   }
+
+  console.log({ minPrice, maxPrice });
 
   const shownProducts = (() => {
     let res = [];
@@ -57,6 +52,7 @@ export default function Shop({ products }) {
       res = products.filter((item) =>
         selectedCategories.includes(item.category)
       );
+      console.log(res);
     } else {
       res = products;
     }
@@ -65,7 +61,6 @@ export default function Shop({ products }) {
     );
   })();
 
-  console.log(shownProducts);
   const sortedProducts = (() => {
     let copyOfSortedProducts;
     if (order === "a-z") {
@@ -91,7 +86,7 @@ export default function Shop({ products }) {
 
     return copyOfSortedProducts;
   })();
-  console.log(sortedProducts);
+
   return (
     <ProductsContext.Provider value={products}>
       <Page padding={12}>

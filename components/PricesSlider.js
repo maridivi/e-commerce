@@ -18,7 +18,7 @@ function PricesSlider({ sliderValue, onChange }) {
       <RangeSlider
         aria-label={["min", "max"]}
         min={0}
-        max={1000}
+        max={5000}
         step={100}
         onChange={onChange}
         value={sliderValue}
@@ -32,7 +32,7 @@ function PricesSlider({ sliderValue, onChange }) {
       </RangeSlider>
       <HStack justify="space-between" width="200px">
         <Text fontSize="md">0</Text>
-        <Text fontSize="md">1000 $</Text>
+        <Text fontSize="md">5000 $</Text>
       </HStack>
     </Box>
   );

@@ -9,7 +9,7 @@ import theme from "../utils/theme";
 export const FilterContext = createContext({
   selectedCategories: [],
   setSelectedCategories: () => {},
-  sliderValue: [0, 1000],
+  sliderValue: [0, 5000],
   setSliderValue: () => {},
 });
 
@@ -25,7 +25,7 @@ export const UserContext = createContext({
 
 function MyApp({ Component, pageProps }) {
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [sliderValue, setSliderValue] = useState([0, 1000]);
+  const [sliderValue, setSliderValue] = useState([0, 5000]);
   const [cartItems, setCartItems] = useState([]);
   const [userData, setUserData] = useState(defaultFormData);
 
