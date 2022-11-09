@@ -14,13 +14,13 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { quantities } from "../../components/CartItem";
 import Page from "../../components/Page";
+import { vercelApi } from "../shop";
 import { CartContext } from "../_app";
 
 export async function getServerSideProps(context) {
   const id = context.query.id;
   try {
-    const product = (await axios.get(`https://fakestoreapi.com/products/${id}`))
-      .data;
+    const product = (await vercelApi.get(`/api/products/${id}`)).data;
     return { props: { product } };
   } catch (err) {
     console.error(err.toString(), id);
@@ -32,6 +32,8 @@ export default function ProductPage({ product: fetchedProduct }) {
   const { setCartItems, cartItems } = useContext(CartContext);
   const router = useRouter();
   const product = fetchedProduct;
+
+  console.log(product);
   const toast = useToast();
   const { quantity, details } = product;
   const [isAdded, setIsAdded] = useState(false);

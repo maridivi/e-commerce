@@ -1,6 +1,1 @@
-export const categories = [
-  "jewelry",
-  "electronics",
-  "women's clothing",
-  "men's clothing",
-];
+export const categories = ["Bookshelves", "Tables", "Sofas", "Chairs"];

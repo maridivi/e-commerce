@@ -7,7 +7,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import FilterBox from "../components/FilterBox";
 import FilterModal from "../components/FilterModal";
 import Page from "../components/Page";
@@ -18,13 +18,16 @@ const ProductsContext = createContext({
   fetchedProducts: undefined,
 });
 
+export const vercelApi = axios.create({
+  baseURL: process.env.VERCEL_URL ?? "http://localhost:3001/",
+});
+
 export async function getServerSideProps() {
   try {
-    const products = (await axios.get("https://fakestoreapi.com/products"))
-      .data;
+    const products = (await vercelApi.get("/api/products")).data;
     return { props: { products } };
   } catch (err) {
-    console.error(err.toString());
+    console.error(err);
     return { props: {} };
   }
 }
@@ -42,7 +45,7 @@ export default function Shop({ products }) {
   const minPrice = sliderValue[0];
   const maxPrice = sliderValue[1];
 
-  const fetchedProducts = products;
+  console.log(products);
 
   function changeProductsOrder(e) {
     setOrder(e.target.value);
@@ -51,17 +54,18 @@ export default function Shop({ products }) {
   const shownProducts = (() => {
     let res = [];
     if (selectedCategories.length > 0) {
-      res = fetchedProducts.filter((item) =>
+      res = products.filter((item) =>
         selectedCategories.includes(item.category)
       );
     } else {
-      res = fetchedProducts;
+      res = products;
     }
     return res.filter(
       (item) => item.price >= minPrice && item.price <= maxPrice
     );
   })();
 
+  console.log(shownProducts);
   const sortedProducts = (() => {
     let copyOfSortedProducts;
     if (order === "a-z") {
@@ -87,8 +91,9 @@ export default function Shop({ products }) {
 
     return copyOfSortedProducts;
   })();
+  console.log(sortedProducts);
   return (
-    <ProductsContext.Provider value={fetchedProducts}>
+    <ProductsContext.Provider value={products}>
       <Page padding={12}>
         <HStack borderColor="blue" width="100%" alignItems="flex-start" gap={2}>
           {isBiggerThan960 && <FilterBox />}
