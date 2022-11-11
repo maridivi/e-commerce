@@ -6,40 +6,43 @@ export default function SingleProduct({ product }) {
 
   return (
     <Link href={{ pathname: "shop/[id]", query: { id: id } }}>
-      <Stack
-        align="center"
-        justify="space-between"
-        height="300px"
+      <VStack
+        alignItems="stretch"
+        justifyContent="stretch"
         overflow="hidden"
         width="100%"
+        height={200}
         cursor="pointer"
         borderRadius="10px"
-        boxShadow="md"
-        padding={4}
-        gap={4}
+        boxShadow="lg"
+        spacing={0}
       >
-        <Image alt={title} src={image} objectFit="contain" minHeight="0" />
+        <Image
+          alt={title}
+          src={image}
+          objectFit="cover"
+          minH={0}
+          flex="1 1 100%"
+        />
 
         <VStack
-          justify="center"
+          justify="start"
           maxW="100%"
           flexShrink="0"
-          gap={6}
           align="start"
+          spacing={0.5}
+          px={3}
+          py={2}
+          flex="1 0 auto"
         >
-          <Text
-            align="center"
-            whiteSpace="nowrap"
-            textOverflow="ellipsis"
-            overflow="hidden"
-            maxWidth="100%"
-            fontSize="md"
-          >
+          <Text maxWidth="100%" fontSize="sm">
             {title}
           </Text>
-          <Text fontSize="sm">{price} €</Text>
+          <Text fontSize="xs" color="gray.500">
+            {price} €
+          </Text>
         </VStack>
-      </Stack>
+      </VStack>
     </Link>
   );
 }

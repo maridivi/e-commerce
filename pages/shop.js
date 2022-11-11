@@ -44,9 +44,8 @@ export default function Shop({ products }) {
     setOrder(e.target.value);
   }
 
-  console.log({ minPrice, maxPrice });
-
   const shownProducts = (() => {
+    if (!products) return [];
     let res = [];
     if (selectedCategories.length > 0) {
       res = products.filter((item) =>
@@ -111,7 +110,7 @@ export default function Shop({ products }) {
               padding={4}
               templateColumns="repeat( auto-fit, minmax(150px, 1fr) )"
               templateRows="minmax(200px, 1fr)"
-              gap={[8, 16]}
+              gap={[4, 8]}
               w="100%"
             >
               {sortedProducts?.map((product, index) => (

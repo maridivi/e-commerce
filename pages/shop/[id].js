@@ -2,17 +2,14 @@ import {
   Button,
   HStack,
   Image,
-  Select,
   Stack,
   Text,
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
-import { quantities } from "../../components/CartItem";
+import { useContext } from "react";
 import Page from "../../components/Page";
 import { vercelApi } from "../shop";
 import { CartContext } from "../_app";
@@ -28,80 +25,48 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function ProductPage({ product: fetchedProduct }) {
+export default function ProductPage({ product }) {
   const { setCartItems, cartItems } = useContext(CartContext);
   const router = useRouter();
-  const product = fetchedProduct;
 
-  console.log(product);
   const toast = useToast();
-  const { quantity, details } = product;
-  const [isAdded, setIsAdded] = useState(false);
+
+  const cartItem = cartItems.find((item) => item.id === product.id);
+  const isAdded = !!cartItem;
 
   function addProduct() {
-    setCartItems((currentItems) => [
-      ...currentItems,
-      { details: product, quantity: 1 },
-    ]);
-    setIsAdded(true);
-    toast({
-      title: "Product added to cart.",
-      description: "Go to cart to change quantity.",
-      status: "success",
-      duration: 4000,
-      isClosable: true,
-    });
+    const productExists = cartItems.find((item) => item.id === product.id);
+    console.log(productExists);
+    if (productExists) {
+      const newCartItems = cartItems.map((item) =>
+        item.id === product.id
+          ? { ...productExists, quantity: productExists.quantity + 1 }
+          : item
+      );
+      setCartItems(newCartItems);
+      console.log(newCartItems);
+    } else {
+      const newCartItems = [...cartItems, { ...product, quantity: 1 }];
+      setCartItems(newCartItems);
+    }
   }
 
-  const addedProduct = (() => {
-    return cartItems.find((item) => item.details.id === product.id);
-  })();
+  function removeProduct() {
+    const productExists = cartItems.find((item) => item.id === product.id);
+    if (productExists.quantity === 1) {
+      const newCartItems = cartItems.filter((item) => item.id !== product.id);
+      setCartItems(newCartItems);
+    } else {
+      const newCartItems = cartItems.map((item) =>
+        item.id === product.id
+          ? { ...productExists, quantity: productExists.quantity - 1 }
+          : item
+      );
 
-  console.log(addedProduct);
-
-  function handleQuantityChange(event) {
-    const value = event.target.value;
-    setCartItems((items) => {
-      return items.map((cartItem) => {
-        if (cartItem.details.id === product.id) {
-          return { ...cartItem, quantity: parseInt(value) };
-        } else {
-          return cartItem;
-        }
-      });
-    });
+      setCartItems(newCartItems);
+    }
   }
-
-  function increaseQuantity() {
-    setCartItems((items) => {
-      return items.map((cartItem) => {
-        if (cartItem.details.id === product.id && addedProduct.quantity < 10) {
-          return { ...cartItem, quantity: addedProduct.quantity + 1 };
-        } else {
-          toast({
-            title: "You have reached maximum quantity!",
-
-            status: "warning",
-            duration: 4000,
-            isClosable: true,
-          });
-          return cartItem;
-        }
-      });
-    });
-  }
-
-  function decreaseQuantity() {
-    setCartItems((items) => {
-      return items.map((cartItem) => {
-        if (cartItem.details.id === product.id && addedProduct.quantity > 0) {
-          return { ...cartItem, quantity: addedProduct.quantity - 1 };
-        } else {
-          return cartItem;
-        }
-      });
-    });
-  }
+  console.log(cartItem);
 
   return (
     <Page padding={8}>
@@ -117,48 +82,51 @@ export default function ProductPage({ product: fetchedProduct }) {
       <Stack
         direction={["column", "column", "row"]}
         key={product?.id}
-        gap={[4, 8, 16]}
-        px={[4, 8]}
+        gap={[4, 6, 8]}
         py={20}
-        width="100%"
-        mx="0 auto"
-        mb="100px"
+        justifyContent="center"
+        alignItems="center"
+        w="100%"
+        maxW={920}
+        overflow="hidden"
       >
         <Image
           alt={product?.title}
           src={product?.image}
-          minHeight="0"
-          objectFit="contain"
-          maxHeight="300px"
+          objectFit="cover"
+          maxWidth={["100%", "100%", "400px", "400px", "500px"]}
+          height="auto"
+          minWidth={0}
           mx="0 auto"
-          width={["100%", "100%", "50%"]}
-          borderRadius="20px"
-          padding={4}
-          boxShadow="md"
+          borderRadius="10px"
+          boxShadow="lg"
         />
-        <VStack gap={14} width={["100%", "100%", "50%"]} align="star">
+        <VStack
+          gap={2}
+          width={["100%", "100%", "50%"]}
+          maxW="100%"
+          align="start"
+        >
           <Text fontSize="2xl" fontWeight="bold">
             {product?.title}
           </Text>
-          <Text fontSize="lg">{product?.price} €</Text>
+
+          <Text fontSize="sm">{product?.description}</Text>
+          <Text fontSize="md" fontWeight="semibold">
+            {product?.price} €
+          </Text>
 
           <HStack>
-            {isAdded ? (
+            {isAdded && (
               <HStack border="solid" borderRadius="5px">
-                <Button variant="unstyled" onClick={decreaseQuantity}>
+                <Button variant="unstyled" onClick={removeProduct}>
                   -
                 </Button>
-                <Text>{addedProduct.quantity}</Text>
-                <Button variant="unstyled" onClick={increaseQuantity}>
+                <Text>{cartItem.quantity}</Text>
+                <Button variant="unstyled" onClick={addProduct}>
                   +
                 </Button>
               </HStack>
-            ) : (
-              <Select onChange={handleQuantityChange} width={16}>
-                {quantities.map((q, i) => (
-                  <option key={i}>{q}</option>
-                ))}
-              </Select>
             )}
 
             {isAdded ? (
@@ -179,12 +147,7 @@ export default function ProductPage({ product: fetchedProduct }) {
           </HStack>
         </VStack>
       </Stack>
-      <Stack px={[4, 8]}>
-        <Text fontWeight="bold" fontSize="xl" mt={6}>
-          About the product
-        </Text>
-        <Text>{product?.description}</Text>
-      </Stack>
+      <Stack px={[4, 8]}></Stack>
     </Page>
   );
 }

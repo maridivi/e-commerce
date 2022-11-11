@@ -6,7 +6,7 @@ import Page from "../components/Page";
 import { CartContext } from "./_app";
 
 export default function Cart() {
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
 
   return (
     <Page>

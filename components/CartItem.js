@@ -11,11 +11,10 @@ import { useContext } from "react";
 import { CartContext } from "../pages/_app";
 import { FiTrash2 } from "react-icons/fi";
 
-export const quantities = [1, 2, 3, 4, 5, 6, 7, 8];
+export const quantities = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 export default function CartItem({ item }) {
-  const { quantity, details } = item;
-  const { image, title, price, id } = details;
+  const { image, title, price, id, quantity } = item;
 
   const { setCartItems } = useContext(CartContext);
 
@@ -23,7 +22,7 @@ export default function CartItem({ item }) {
     const value = event.target.value;
     setCartItems((items) => {
       return items.map((cartItem) => {
-        if (cartItem.details.id === id) {
+        if (cartItem.id === id) {
           return { ...cartItem, quantity: parseInt(value) };
         } else {
           return cartItem;
@@ -34,7 +33,7 @@ export default function CartItem({ item }) {
 
   function removeProduct() {
     setCartItems((items) => {
-      const isSelectedProduct = (product) => product.details.id === id;
+      const isSelectedProduct = (product) => product.id === id;
       const itemIndex = items.findIndex(isSelectedProduct);
       const newItems = [...items];
       newItems.splice(itemIndex, 1);
@@ -61,7 +60,12 @@ export default function CartItem({ item }) {
         ></Image>
       </Box>
 
-      <VStack justify="center" align="center" width={["200", "300px", "400px"]}>
+      <VStack
+        justify="center"
+        align="start"
+        width={["100px", "200px"]}
+        // border="solid"
+      >
         <Text textAlign="center">{title}</Text>
         <Text fontWeight="bold">{price} €</Text>
         <Select onChange={handleQuantityChange} width={16}>
