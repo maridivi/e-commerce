@@ -13,7 +13,7 @@ import Page from "../components/Page";
 export default function ContactForm() {
   const toast = useToast();
   return (
-    <Page padding={36}>
+    <Page>
       <VStack gap={6} fontFamily="Inter">
         <Text fontSize={32}>Contact us</Text>
         <FormControl>

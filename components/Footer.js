@@ -6,6 +6,7 @@ import {
   AiFillFacebook,
   AiOutlineTwitter,
 } from "react-icons/ai";
+import Section from "./Section";
 
 export default function Footer() {
   const getYear = () => {
@@ -15,7 +16,6 @@ export default function Footer() {
   };
   return (
     <VStack
-      padding={10}
       bottom="0"
       width="100%"
       // bgGradient="linear(to-t, #FAF7F0, white)"
@@ -25,30 +25,33 @@ export default function Footer() {
       gap={6}
       color="gray.700"
     >
-      <HStack justify="space-evenly" align="center" width="100%">
-        <VStack align="flex-start">
-          <NextLink href="/shop">Shop</NextLink>
-          <NextLink href="/contact">Contact</NextLink>
-          <NextLink href="/cart">Cart</NextLink>
-          <NextLink href="/">Home</NextLink>
-        </VStack>
-        <VStack>
-          <Icon as={GiBowTie} boxSize="6rem" />
-          <HStack>
-            <Link href="https://www.instagram.com/" target="_blank">
-              <AiOutlineInstagram cursor="pointer" />
-            </Link>
-            <Link href="https://www.facebook.com/">
-              <AiFillFacebook />
-            </Link>
-            <Link href="https://twitter.com/home">
-              <AiOutlineTwitter />
-            </Link>
+      <Section>
+        <HStack justify="space-between" width="100%">
+          <HStack spacing={8} align="center">
+            <NextLink href="/shop">Shop</NextLink>
+            <NextLink href="/contact">Contact</NextLink>
+            <NextLink href="/cart">Cart</NextLink>
+            <NextLink href="/">Home</NextLink>
           </HStack>
-        </VStack>
-      </HStack>
-
-      <Text fontSize="xs">© {getYear()} Created by Marianna Di Vito</Text>
+          <HStack spacing={8}>
+            <HStack spacing={4}>
+              <Link href="https://www.instagram.com/" target="_blank">
+                <AiOutlineInstagram cursor="pointer" />
+              </Link>
+              <Link href="https://www.facebook.com/">
+                <AiFillFacebook />
+              </Link>
+              <Link href="https://twitter.com/home">
+                <AiOutlineTwitter />
+              </Link>
+            </HStack>
+            <Icon as={GiBowTie} boxSize="4rem" />
+          </HStack>
+        </HStack>
+        <Text fontSize="xs" mb={4}>
+          © {getYear()} Created by Marianna Di Vito
+        </Text>
+      </Section>
     </VStack>
   );
 }

@@ -88,7 +88,7 @@ export default function Shop({ products }) {
 
   return (
     <ProductsContext.Provider value={products}>
-      <Page padding={12}>
+      <Page>
         <HStack borderColor="blue" width="100%" alignItems="flex-start" gap={2}>
           {isBiggerThan960 && <FilterBox />}
 

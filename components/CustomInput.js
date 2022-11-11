@@ -13,8 +13,8 @@ export default function CustomInput({
   errorMessage,
 }) {
   return (
-    <VStack align="stretch" width="300px">
-      <FormLabel mb="-1" htmlFor={label}>
+    <VStack align="stretch" maxW="500px">
+      <FormLabel mb="-1" htmlFor={label} fontWeight="semibold">
         {label}
       </FormLabel>
       <Input
@@ -28,7 +28,7 @@ export default function CustomInput({
         minLength={minLength}
         maxLength={maxLength}
         min={min}
-        borderColor={isValid === undefined ? "black" : "red"}
+        borderColor={isValid === undefined ? "gray.300" : "red"}
       />
       {isValid && (
         <Text fontSize="xs" color="red.400">

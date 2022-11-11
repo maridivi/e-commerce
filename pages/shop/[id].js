@@ -69,7 +69,7 @@ export default function ProductPage({ product }) {
   console.log(cartItem);
 
   return (
-    <Page padding={8}>
+    <Page>
       <HStack>
         <Link href="/shop">
           <Button> Continue Shopping</Button>
