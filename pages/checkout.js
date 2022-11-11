@@ -1,14 +1,23 @@
-import { Button, FormControl, Stack, Text, Toast } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  Grid,
+  GridItem,
+  Stack,
+  Text,
+  Toast,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import Page from "../components/Page";
+import Section from "../components/Section";
 import { UserContext } from "./_app";
 
 export default function CheckOut() {
   const ctx = useContext(UserContext);
   const { userData, setUserData } = ctx;
-
+  const [isValid, setIsValid] = useState(false);
   const [isError, setIsError] = useState(false);
   const router = useRouter();
 
@@ -39,7 +48,8 @@ export default function CheckOut() {
   }
 
   function validateForm() {
-    if (fname.inputName.match(/\d/)) {
+    let canProceed = true;
+    if (fname.inputName.trim() === "" || fname.inputName.match(/\d/)) {
       setUserData((userData) => ({
         ...userData,
         [fname.key]: {
@@ -47,8 +57,9 @@ export default function CheckOut() {
           errorMessage: "Enter a valid first name",
         },
       }));
+      canProceed = false;
     }
-    if (lname.inputName.match(/\d/)) {
+    if (lname.inputName.trim() === "" || lname.inputName.match(/\d/)) {
       setUserData((userData) => ({
         ...userData,
         [lname.key]: {
@@ -56,8 +67,10 @@ export default function CheckOut() {
           errorMessage: "Enter a valid last name",
         },
       }));
+      canProceed = false;
     }
     if (
+      email.inputName.trim() === "" ||
       !email.inputName.match(/^([a-z\d\.-_]+)@([a-z\d\.-_]+)\.([a-z]{2,})$/)
     ) {
       setUserData((userData) => ({
@@ -67,8 +80,12 @@ export default function CheckOut() {
           errorMessage: "Enter a valid email",
         },
       }));
+      canProceed = false;
     }
-    if (!address.inputName.match(/[a-zA-Z0-9]/)) {
+    if (
+      address.inputName.trim() === "" ||
+      !address.inputName.match(/[a-zA-Z0-9]/)
+    ) {
       setUserData((userData) => ({
         ...userData,
         [address.key]: {
@@ -76,8 +93,9 @@ export default function CheckOut() {
           errorMessage: "Enter a valid address",
         },
       }));
+      canProceed = false;
     }
-    if (city.inputName.match(/\d/)) {
+    if (city.inputName.trim() === "" || city.inputName.match(/\d/)) {
       setUserData((userData) => ({
         ...userData,
         [city.key]: {
@@ -85,8 +103,9 @@ export default function CheckOut() {
           errorMessage: "Enter a valid city",
         },
       }));
+      canProceed = false;
     }
-    if (state.inputName.match(/[^a-zA-Z]/)) {
+    if (state.inputName.trim() === "" || state.inputName.match(/[^a-zA-Z]/)) {
       setUserData((userData) => ({
         ...userData,
         [state.key]: {
@@ -94,8 +113,12 @@ export default function CheckOut() {
           errorMessage: "Enter a valid state",
         },
       }));
+      canProceed = false;
     }
-    if (zipCode.inputName.match(/[a-zA-z]/)) {
+    if (
+      zipCode.inputName.trim() === "" ||
+      zipCode.inputName.match(/[a-zA-z]/)
+    ) {
       setUserData((userData) => ({
         ...userData,
         [zipCode.key]: {
@@ -103,8 +126,12 @@ export default function CheckOut() {
           errorMessage: "Enter a valid zip code",
         },
       }));
+      canProceed = false;
     }
-    if (cardNumber.inputName.match("[a-zA-z]")) {
+    if (
+      cardNumber.inputName.trim() === "" ||
+      cardNumber.inputName.match("[a-zA-z]")
+    ) {
       setUserData((userData) => ({
         ...userData,
         [cardNumber.key]: {
@@ -112,43 +139,45 @@ export default function CheckOut() {
           errorMessage: "Enter a valid card number",
         },
       }));
+      canProceed = false;
     }
+    setIsValid(canProceed);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+
     validateForm();
-    console.log(userData);
-    let canProceed = true;
+    // let canProceed = true;
 
-    Object.entries(userData).forEach(([key, data]) => {
-      if (data.value.length === 0) {
-        canProceed = false;
-        setUserData((userData) => ({
-          ...userData,
-          [key]: {
-            ...userData[key],
-            errorMessage: "Field required",
-          },
-        }));
-      }
-    });
+    // Object.entries(userData).forEach(([key, data]) => {
+    //   if (data.value.length === 0) {
+    //     // canProceed = false;
+    //     setUserData((userData) => ({
+    //       ...userData,
+    //       [key]: {
+    //         ...userData[key],
+    //         errorMessage: "Field required",
+    //       },
+    //     }));
+    //   }
+    // });
 
-    console.log(canProceed);
+    // console.log(canProceed);
 
-    if (!canProceed) return;
+    if (!isValid) return;
 
     router.push({ pathname: "/order_review" });
   }
 
   return (
-    <Page padding={16}>
-      <Stack direction="column">
+    <Page padding={4}>
+      <Section>
         <FormControl
           isRequired={isError === true && true}
           onSubmit={handleSubmit}
         >
-          <Stack gap={4}>
+          <InputGrid gap={4}>
             {Object.keys(userData).map((key, index) => (
               <CustomInput
                 label={key}
@@ -164,13 +193,20 @@ export default function CheckOut() {
                 errorMessage={userData[key].errorMessage}
               />
             ))}
-
-            <Button type="submit" width={32} mx="auto" onClick={handleSubmit}>
-              Review
-            </Button>
-          </Stack>
+          </InputGrid>
+          <Button type="submit" width={32} onClick={handleSubmit}>
+            Review
+          </Button>
         </FormControl>
-      </Stack>
+      </Section>
     </Page>
+  );
+}
+
+function InputGrid({ children }) {
+  return (
+    <Grid gridTemplateColumns={["1fr", "1fr", "1fr 1fr"]} gap={6} mb={8}>
+      {children}
+    </Grid>
   );
 }
