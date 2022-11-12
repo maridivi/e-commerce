@@ -11,6 +11,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import FilterBox from "../components/FilterBox";
 import FilterModal from "../components/FilterModal";
 import Page from "../components/Page";
+import Section from "../components/Section";
 import SingleProduct from "../components/SingleProduct";
 import { FilterContext } from "./_app";
 
@@ -89,36 +90,42 @@ export default function Shop({ products }) {
   return (
     <ProductsContext.Provider value={products}>
       <Page>
-        <HStack borderColor="blue" width="100%" alignItems="flex-start" gap={2}>
-          {isBiggerThan960 && <FilterBox />}
+        <Section>
+          <HStack
+            borderColor="blue"
+            width="100%"
+            alignItems="flex-start"
+            gap={2}
+          >
+            {isBiggerThan960 && <FilterBox />}
 
-          <VStack w="100%" gap={8}>
-            <HStack justify="space-between" width="100%">
-              {isSmallerThan960 && <FilterModal />}
+            <VStack w="100%" gap={8}>
+              <HStack justify="space-between" width="100%">
+                {isSmallerThan960 && <FilterModal />}
 
-              <HStack flexGrow="0">
-                <Text whiteSpace="nowrap">Order by:</Text>
-                <Select onChange={changeProductsOrder} color="gray.700">
-                  <option value="lowest">Price: lowest first</option>
-                  <option value="highest">Price: highest first</option>
-                  <option value="a-z">Name: A-Z</option>
-                  <option value="z-a">Name: Z-A</option>
-                </Select>
+                <HStack flexGrow="0">
+                  <Text whiteSpace="nowrap">Order by:</Text>
+                  <Select onChange={changeProductsOrder} color="gray.700">
+                    <option value="lowest">Price: lowest first</option>
+                    <option value="highest">Price: highest first</option>
+                    <option value="a-z">Name: A-Z</option>
+                    <option value="z-a">Name: Z-A</option>
+                  </Select>
+                </HStack>
               </HStack>
-            </HStack>
-            <Grid
-              padding={4}
-              templateColumns="repeat( auto-fit, minmax(150px, 1fr) )"
-              templateRows="minmax(200px, 1fr)"
-              gap={[4, 8]}
-              w="100%"
-            >
-              {sortedProducts?.map((product, index) => (
-                <SingleProduct product={product} key={index} />
-              ))}
-            </Grid>
-          </VStack>
-        </HStack>
+              <Grid
+                templateColumns="repeat( auto-fit, minmax(150px, 1fr) )"
+                templateRows="minmax(200px, 1fr)"
+                gap={[4, 8]}
+                w="100%"
+              >
+                {sortedProducts?.map((product, index) => (
+                  <SingleProduct product={product} key={index} />
+                ))}
+              </Grid>
+            </VStack>
+          </HStack>
+        </Section>
       </Page>
     </ProductsContext.Provider>
   );

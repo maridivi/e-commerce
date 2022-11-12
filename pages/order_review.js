@@ -43,27 +43,24 @@ export default function ReviewOrder() {
         </Text>
 
         <Grid mb={16} gridTemplateColumns={["2fr 1fr"]}>
-          <GridItem gap={6}>
-            <Box spacing={6}>
-              <Text fontWeight="bold">Your Shipping details</Text>
-              <List>
-                <ListItem>{firstName.value}</ListItem>
-                <ListItem>{lastName.value}</ListItem>
-                <ListItem>{address.value}</ListItem>
-                <ListItem>
-                  {city.value + " " + state.value + " " + zip_code.value}
-                </ListItem>
-              </List>
-            </Box>
+          <GridItem>
+            <VStack align="start" spacing={1}>
+              <Text fontWeight="bold" mt={6}>
+                Your Shipping details
+              </Text>
 
-            <Divider width="50%" />
-            <Text fontWeight="bold">Your payment details</Text>
-            <List>
-              <ListItem>
-                XXXX-XXXX-XXXX-{card_number.value.substring(12)}
-              </ListItem>
-              <ListItem>{exp_date.value}</ListItem>
-            </List>
+              <Text>{firstName.value}</Text>
+              <Text>{lastName.value}</Text>
+              <Text>{address.value}</Text>
+              <Text>
+                {city.value + " " + state.value + " " + zip_code.value}
+              </Text>
+
+              <Divider width="50%" my={8} />
+              <Text fontWeight="bold">Your payment details</Text>
+              <Text>XXXX-XXXX-XXXX-{card_number.value.substring(12)}</Text>
+              <Text>{exp_date.value}</Text>
+            </VStack>
           </GridItem>
           <GridItem>
             <VStack

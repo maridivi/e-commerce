@@ -1,12 +1,17 @@
 import Page from "../components/Page";
 import { HStack, Heading, Button, VStack, Stack } from "@chakra-ui/react";
 import Link from "next/link";
+import Section from "../components/Section";
 
 export default function Home() {
   return (
-    <Page>
+    <Page position="relative">
       <Stack
-        backgroundImage="url(/images/clothes.jpg)"
+        backgroundImage={[
+          "url(/images/cozy_mobile.jpg)",
+          "url(/images/cozy_mobile.jpg)",
+          "url(/images/cozy.jpg)",
+        ]}
         backgroundSize="cover"
         height="calc( 100vh - 72px )"
         minH={500}
@@ -43,7 +48,7 @@ export default function Home() {
             lineHeight={1.6}
             zIndex={2}
           >
-            Everything you need. <br></br> All in one place.
+            Cozy touch. <br></br> For your dream home.
           </Heading>
           <Link href="/shop">
             <Button
@@ -65,15 +70,15 @@ export default function Home() {
         position="absolute"
         color="gray.700"
         fontSize="2xs"
-        bottom="270px"
-        right="10px"
+        bottom="10px"
+        right="40px"
       >
         Photo by{" "}
-        <a href="https://unsplash.com/@anotherlovely?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
-          Alyssa Strohmann
+        <a href="https://unsplash.com/ja/@srosinger3997?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+          Samantha Gades
         </a>{" "}
         on{" "}
-        <a href="https://unsplash.com/s/photos/clothes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+        <a href="https://unsplash.com/s/photos/interior-design-cozy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
           Unsplash
         </a>
       </Heading>

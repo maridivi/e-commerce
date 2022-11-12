@@ -7,6 +7,7 @@ export default function Page({
   padding,
   alignContent,
   justifyContent,
+  position,
 }) {
   return (
     <VStack minHeight="100vh">
@@ -18,6 +19,7 @@ export default function Page({
         alignContent={alignContent}
         justify={justifyContent}
         flex={1}
+        position={position}
       >
         {children}
       </VStack>

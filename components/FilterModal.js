@@ -15,7 +15,12 @@ export default function FilterModal() {
 
   return (
     <>
-      <Button onClick={onOpen} backgroundColor="pink.200">
+      <Button
+        onClick={onOpen}
+        backgroundColor="pink.400"
+        color="white"
+        _hover={{ backgroundColor: "pink.300" }}
+      >
         Show filters
       </Button>
 

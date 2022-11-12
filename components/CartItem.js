@@ -1,9 +1,9 @@
 import {
   Box,
   Button,
+  HStack,
   Image,
   Select,
-  Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -42,12 +42,12 @@ export default function CartItem({ item }) {
   }
 
   return (
-    <Stack
-      direction={["column", "column", "row"]}
+    <HStack
       justify="space-between"
-      gap={[2, 4, 6, 8, 10, 12]}
       align="center"
-      width="100%"
+      width="100vw"
+      maxW="600px"
+      padding={4}
     >
       <Box width={64} margin="0 auto">
         <Image
@@ -60,12 +60,7 @@ export default function CartItem({ item }) {
         ></Image>
       </Box>
 
-      <VStack
-        justify="center"
-        align="start"
-        width={["100px", "200px"]}
-        // border="solid"
-      >
+      <VStack justify="center" align="start" width={["100px", "200px"]}>
         <Text textAlign="center">{title}</Text>
         <Text fontWeight="bold">{price} €</Text>
         <Select onChange={handleQuantityChange} width={16}>
@@ -79,6 +74,6 @@ export default function CartItem({ item }) {
       <Button onClick={removeProduct}>
         <FiTrash2 />
       </Button>
-    </Stack>
+    </HStack>
   );
 }
