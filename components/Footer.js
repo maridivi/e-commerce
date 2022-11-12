@@ -1,4 +1,4 @@
-import { HStack, Icon, Text, VStack, Link } from "@chakra-ui/react";
+import { HStack, Icon, Text, VStack, Link, Box, Stack } from "@chakra-ui/react";
 import NextLink from "./NextLink";
 import { GiBowTie } from "react-icons/gi";
 import {
@@ -15,25 +15,36 @@ export default function Footer() {
     return year;
   };
   return (
-    <VStack
+    <Box
       bottom="0"
       width="100%"
-      // bgGradient="linear(to-t, #FAF7F0, white)"
       bgColor="rgb(251 247 243)"
-      flexGrow={0}
       minHeight={0}
-      gap={6}
       color="gray.700"
+      overflow="hidden"
     >
-      <Section>
-        <HStack justify="space-between" width="100%">
-          <HStack spacing={8} align="center">
+      <Section py={4}>
+        <Stack
+          justify="space-between"
+          spacing={0}
+          width="100%"
+          direction={["column", "row"]}
+        >
+          <HStack
+            spacing={[4, 6, 8]}
+            align="center"
+            justify={["space-between", "start"]}
+          >
             <NextLink href="/shop">Shop</NextLink>
             <NextLink href="/contact">Contact</NextLink>
             <NextLink href="/cart">Cart</NextLink>
             <NextLink href="/">Home</NextLink>
           </HStack>
-          <HStack spacing={8}>
+          <HStack
+            spacing={[4, 4, 8]}
+            h={[14, "auto"]}
+            justify={["space-between", "end"]}
+          >
             <HStack spacing={4}>
               <Link href="https://www.instagram.com/" target="_blank">
                 <AiOutlineInstagram cursor="pointer" />
@@ -47,11 +58,11 @@ export default function Footer() {
             </HStack>
             <Icon as={GiBowTie} boxSize="4rem" />
           </HStack>
-        </HStack>
-        <Text fontSize="xs" mb={4}>
+        </Stack>
+        <Text fontSize={["2xs", "xs"]}>
           © {getYear()} Created by Marianna Di Vito
         </Text>
       </Section>
-    </VStack>
+    </Box>
   );
 }

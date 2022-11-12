@@ -22,7 +22,13 @@ export default function Cart() {
             </Link>
           </VStack>
         ) : (
-          <Stack direction="column" gap={[4, 8, 16]} align="center">
+          <Stack
+            direction="column"
+            gap={[4, 8, 16]}
+            align="center"
+            overflow="hidden"
+            maxW="100%"
+          >
             <Link href="/shop">
               <Button width="200px">Continue Shopping</Button>
             </Link>

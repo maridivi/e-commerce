@@ -10,7 +10,7 @@ export default function Page({
   position,
 }) {
   return (
-    <VStack minHeight="100vh">
+    <VStack minHeight="100vh" minW="100%" maxW="100%" overflow="hidden">
       <Header />
       <VStack
         minH="100%"

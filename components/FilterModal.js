@@ -20,6 +20,7 @@ export default function FilterModal() {
         backgroundColor="pink.400"
         color="white"
         _hover={{ backgroundColor: "pink.300" }}
+        fontSize={["xs", "sm"]}
       >
         Show filters
       </Button>

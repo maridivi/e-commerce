@@ -1,12 +1,4 @@
-import {
-  Button,
-  FormControl,
-  Grid,
-  GridItem,
-  Stack,
-  Text,
-  Toast,
-} from "@chakra-ui/react";
+import { Button, FormControl, Grid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import CustomInput from "../components/CustomInput";
@@ -18,7 +10,6 @@ export default function CheckOut() {
   const ctx = useContext(UserContext);
   const { userData, setUserData } = ctx;
   const [isValid, setIsValid] = useState(false);
-  const [isError, setIsError] = useState(false);
   const router = useRouter();
 
   function getInputValue(key) {
@@ -35,6 +26,7 @@ export default function CheckOut() {
   const city = getInputValue("City");
   const zipCode = getInputValue("Zip Code");
   const cardNumber = getInputValue("Credit/Debit Card Number");
+  const exp_date = getInputValue("Expiry Date");
 
   function handleChange(e) {
     setUserData((userData) => ({
@@ -141,6 +133,16 @@ export default function CheckOut() {
       }));
       canProceed = false;
     }
+    if (exp_date.inputName.trim() === "") {
+      setUserData((userData) => ({
+        ...userData,
+        [exp_date.key]: {
+          ...userData[exp_date.key],
+          errorMessage: "Enter a valid expiry date",
+        },
+      }));
+      canProceed = false;
+    }
     setIsValid(canProceed);
   }
 
@@ -148,22 +150,7 @@ export default function CheckOut() {
     e.preventDefault();
 
     validateForm();
-    // let canProceed = true;
-
-    // Object.entries(userData).forEach(([key, data]) => {
-    //   if (data.value.length === 0) {
-    //     // canProceed = false;
-    //     setUserData((userData) => ({
-    //       ...userData,
-    //       [key]: {
-    //         ...userData[key],
-    //         errorMessage: "Field required",
-    //       },
-    //     }));
-    //   }
-    // });
-
-    // console.log(canProceed);
+    console.log(isValid);
 
     if (!isValid) return;
 
@@ -173,10 +160,7 @@ export default function CheckOut() {
   return (
     <Page padding={4}>
       <Section>
-        <FormControl
-          isRequired={isError === true && true}
-          onSubmit={handleSubmit}
-        >
+        <FormControl onSubmit={handleSubmit}>
           <InputGrid gap={4}>
             {Object.keys(userData).map((key, index) => (
               <CustomInput

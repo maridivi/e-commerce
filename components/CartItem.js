@@ -48,6 +48,7 @@ export default function CartItem({ item }) {
       width="100vw"
       maxW="600px"
       padding={4}
+      border="solid"
     >
       <Box width={64} margin="0 auto">
         <Image
@@ -61,7 +62,9 @@ export default function CartItem({ item }) {
       </Box>
 
       <VStack justify="center" align="start" width={["100px", "200px"]}>
-        <Text textAlign="center">{title}</Text>
+        <Text textAlign="center" fontSize={["xs", "md"]}>
+          {title}
+        </Text>
         <Text fontWeight="bold">{price} €</Text>
         <Select onChange={handleQuantityChange} width={16}>
           {quantities.map((q, i) => (

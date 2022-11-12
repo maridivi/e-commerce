@@ -7,7 +7,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import FilterBox from "../components/FilterBox";
 import FilterModal from "../components/FilterModal";
 import Page from "../components/Page";
@@ -104,8 +104,14 @@ export default function Shop({ products }) {
                 {isSmallerThan960 && <FilterModal />}
 
                 <HStack flexGrow="0">
-                  <Text whiteSpace="nowrap">Order by:</Text>
-                  <Select onChange={changeProductsOrder} color="gray.700">
+                  <Text whiteSpace="nowrap" fontSize={["xs", "sm"]}>
+                    Order by:
+                  </Text>
+                  <Select
+                    onChange={changeProductsOrder}
+                    color="gray.700"
+                    fontSize={["xs", "sm"]}
+                  >
                     <option value="lowest">Price: lowest first</option>
                     <option value="highest">Price: highest first</option>
                     <option value="a-z">Name: A-Z</option>

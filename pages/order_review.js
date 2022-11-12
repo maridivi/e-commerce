@@ -42,22 +42,23 @@ export default function ReviewOrder() {
           Review your order
         </Text>
 
-        <Grid mb={16} gridTemplateColumns={["2fr 1fr"]}>
+        <Grid mb={16} gridTemplateColumns={["1fr 210px"]}>
           <GridItem>
-            <VStack align="start" spacing={1}>
-              <Text fontWeight="bold" mt={6}>
+            <VStack align="start" spacing={0}>
+              <Text fontWeight="bold" mt={6} mb={2}>
                 Your Shipping details
               </Text>
 
               <Text>{firstName.value}</Text>
               <Text>{lastName.value}</Text>
               <Text>{address.value}</Text>
-              <Text>
+              <Text pb={6}>
                 {city.value + " " + state.value + " " + zip_code.value}
               </Text>
 
-              <Divider width="50%" my={8} />
-              <Text fontWeight="bold">Your payment details</Text>
+              <Text fontWeight="bold" pb={2}>
+                Your payment details
+              </Text>
               <Text>XXXX-XXXX-XXXX-{card_number.value.substring(12)}</Text>
               <Text>{exp_date.value}</Text>
             </VStack>
