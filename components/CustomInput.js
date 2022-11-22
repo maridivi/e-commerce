@@ -14,7 +14,12 @@ export default function CustomInput({
 }) {
   return (
     <VStack align="stretch" maxW="500px">
-      <FormLabel mb="-1" htmlFor={label} fontWeight="semibold">
+      <FormLabel
+        mb="-1"
+        htmlFor={label}
+        fontWeight="semibold"
+        fontSize={["sm", "md"]}
+      >
         {label}
       </FormLabel>
       <Input

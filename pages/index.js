@@ -1,7 +1,6 @@
 import Page from "../components/Page";
-import { HStack, Heading, Button, VStack, Stack } from "@chakra-ui/react";
+import { Heading, Button, VStack, Stack } from "@chakra-ui/react";
 import Link from "next/link";
-import Section from "../components/Section";
 
 export default function Home() {
   return (
@@ -54,10 +53,11 @@ export default function Home() {
             <Button
               variant="solid"
               color="white"
-              backgroundColor="pink.300"
+              backgroundColor="pink.400"
               width={48}
               height={12}
               fontSize="lg"
+              _hover={{ backgroundColor: "pink.300" }}
             >
               Start shopping
             </Button>

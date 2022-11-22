@@ -42,9 +42,9 @@ export default function ReviewOrder() {
           Review your order
         </Text>
 
-        <Grid mb={16} gridTemplateColumns={["1fr 210px"]}>
+        <Grid mb={16} templateColumns="repeat( auto-fit, minmax(150px, 1fr) )">
           <GridItem>
-            <VStack align="start" spacing={0}>
+            <VStack align="start" spacing={0} padding={6}>
               <Text fontWeight="bold" mt={6} mb={2}>
                 Your Shipping details
               </Text>

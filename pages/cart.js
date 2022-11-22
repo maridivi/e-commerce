@@ -30,7 +30,9 @@ export default function Cart() {
             maxW="100%"
           >
             <Link href="/shop">
-              <Button width="200px">Continue Shopping</Button>
+              <Button width="200px" fontSize={["xs", "md"]}>
+                Continue Shopping
+              </Button>
             </Link>
             {cartItems.map((item, index) => {
               return <CartItem key={index} item={item} />;

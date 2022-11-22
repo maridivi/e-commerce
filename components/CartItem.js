@@ -4,6 +4,7 @@ import {
   HStack,
   Image,
   Select,
+  Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -42,13 +43,14 @@ export default function CartItem({ item }) {
   }
 
   return (
-    <HStack
+    <Stack
       justify="space-between"
       align="center"
       width="100vw"
       maxW="600px"
       padding={4}
-      border="solid"
+      direction={["column", "row"]}
+      gap={[2, 4, 6]}
     >
       <Box width={64} margin="0 auto">
         <Image
@@ -58,15 +60,21 @@ export default function CartItem({ item }) {
           objectFit="contain"
           maxHeight="200px"
           margin="0 auto"
-        ></Image>
+        />
       </Box>
 
-      <VStack justify="center" align="start" width={["100px", "200px"]}>
+      <VStack width="250px" align="start">
         <Text textAlign="center" fontSize={["xs", "md"]}>
           {title}
         </Text>
-        <Text fontWeight="bold">{price} €</Text>
-        <Select onChange={handleQuantityChange} width={16}>
+        <Text fontWeight="bold" fontSize={["xs", "md"]}>
+          {price} €
+        </Text>
+        <Select
+          onChange={handleQuantityChange}
+          width={16}
+          fontSize={["xs", "md"]}
+        >
           {quantities.map((q, i) => (
             <option selected={q === quantity} key={i}>
               {q}
@@ -77,6 +85,6 @@ export default function CartItem({ item }) {
       <Button onClick={removeProduct}>
         <FiTrash2 />
       </Button>
-    </HStack>
+    </Stack>
   );
 }
