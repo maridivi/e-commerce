@@ -133,9 +133,9 @@ export default function ProductPage({ product }) {
                 <Link href="/cart">
                   <Button
                     width="150px"
-                    backgroundColor="pink.400"
+                    backgroundColor="coral.400"
                     color="white"
-                    _hover={{ backgroundColor: "pink.300" }}
+                    _hover={{ backgroundColor: "coral.300" }}
                   >
                     View cart
                   </Button>
@@ -144,9 +144,9 @@ export default function ProductPage({ product }) {
                 <Button
                   onClick={addProduct}
                   width="150px"
-                  backgroundColor="pink.400"
+                  backgroundColor="coral.200"
                   color="white"
-                  _hover={{ backgroundColor: "pink.300" }}
+                  _hover={{ backgroundColor: "coral.100" }}
                 >
                   Add to cart
                 </Button>

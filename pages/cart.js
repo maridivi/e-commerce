@@ -40,10 +40,10 @@ export default function Cart() {
             <Link href="/checkout">
               <Button
                 variant="primary"
-                backgroundColor="pink.400"
+                backgroundColor="coral.200"
                 width="200px"
                 color="white"
-                _hover={{ backgroundColor: "pink.300" }}
+                _hover={{ backgroundColor: "coral.100" }}
               >
                 Go to checkout
               </Button>

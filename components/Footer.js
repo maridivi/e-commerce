@@ -1,4 +1,13 @@
-import { HStack, Icon, Text, VStack, Link, Box, Stack } from "@chakra-ui/react";
+import {
+  HStack,
+  Icon,
+  Text,
+  VStack,
+  Link,
+  Box,
+  Stack,
+  Image,
+} from "@chakra-ui/react";
 import NextLink from "./NextLink";
 import { GiBowTie } from "react-icons/gi";
 import {
@@ -22,30 +31,29 @@ export default function Footer() {
       minHeight={0}
       color="gray.700"
       overflow="hidden"
+      pt="10px"
     >
       <Section py={4}>
         <Stack
           justify="space-between"
           spacing={0}
           width="100%"
-          direction={["column", "row"]}
+          direction={["column", "column", "row"]}
         >
           <HStack
-            spacing={[4, 6, 8]}
             align="center"
+            spacing={[2, 4]}
             justify={["space-between", "start"]}
+            mb="10px"
+            mt={["0", "0", "10px"]}
           >
             <NextLink href="/shop">Shop</NextLink>
             <NextLink href="/contact">Contact</NextLink>
             <NextLink href="/cart">Cart</NextLink>
             <NextLink href="/">Home</NextLink>
           </HStack>
-          <HStack
-            spacing={[4, 4, 8]}
-            h={[14, "auto"]}
-            justify={["space-between", "end"]}
-          >
-            <HStack spacing={4}>
+          <HStack spacing={[2, 4, 8]} h={[14, "auto"]}>
+            <HStack spacing={3}>
               <Link href="https://www.instagram.com/" target="_blank">
                 <AiOutlineInstagram cursor="pointer" />
               </Link>
@@ -56,10 +64,10 @@ export default function Footer() {
                 <AiOutlineTwitter />
               </Link>
             </HStack>
-            <Icon as={GiBowTie} boxSize="4rem" />
+            <Image height="25px" src="/images/logo.png" alt="logo" />
           </HStack>
         </Stack>
-        <Text fontSize={["2xs", "xs"]}>
+        <Text fontSize={["2xs", "xs"]} mt="16px">
           © {getYear()} Created by Marianna Di Vito
         </Text>
       </Section>

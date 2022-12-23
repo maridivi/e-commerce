@@ -48,7 +48,7 @@ export default function Header() {
         >
           <NextLink href="/">
             <Link fontSize={28} fontFamily="lora, serif" fontWeight="extrabold">
-              <Image alt="logo" src="/images/logo.png"></Image>
+              <Image height="35px" alt="logo" src="/images/logo.png"></Image>
             </Link>
           </NextLink>
           <HStack gap={[2, 4, 6, 8]}>
