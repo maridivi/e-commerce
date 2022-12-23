@@ -1,6 +1,7 @@
 import Page from "../components/Page";
 import { Heading, Button, VStack, Stack } from "@chakra-ui/react";
 import Link from "next/link";
+import Section from "../components/Section";
 
 export default function Home() {
   return (
@@ -15,54 +16,52 @@ export default function Home() {
         height="calc( 100vh - 72px )"
         minH={500}
         width="full"
-        padding={8}
+        py={8}
         zIndex={0}
         position="relative"
         mt="-3"
         mb="-3"
+        justify="center"
       >
-        <Stack
-          bgColor="white"
-          zIndex={1}
-          position="absolute"
-          top={0}
-          right={0}
-          left={0}
-          bottom={0}
-          opacity={0.3}
-        />
-        <VStack
-          w="80vw"
-          h="100%"
-          mx="auto"
-          alignItems="start"
-          justifyContent="center"
-          gap={6}
-          zIndex={1}
-        >
-          <Heading
-            as="h1"
-            fontFamily="Lora"
-            color="gray.700"
-            lineHeight={1.6}
-            zIndex={2}
-          >
-            Cozy touch. <br></br> For your dream home.
-          </Heading>
-          <Link href="/shop">
-            <Button
-              variant="solid"
-              color="white"
-              backgroundColor="pink.400"
-              width={48}
-              height={12}
-              fontSize="lg"
-              _hover={{ backgroundColor: "pink.300" }}
+        <Section>
+          <Stack
+            bgColor="white"
+            zIndex={1}
+            position="absolute"
+            top={0}
+            right={0}
+            left={0}
+            bottom={0}
+            opacity={0.3}
+          />
+          <VStack h="100%" alignItems="start" gap={6} zIndex={1}>
+            <Heading
+              as="h1"
+              fontFamily="Lora"
+              color="gray.700"
+              lineHeight={1.6}
+              zIndex={2}
+              mb={6}
             >
-              Start shopping
-            </Button>
-          </Link>
-        </VStack>
+              Cozy touch. <br></br> For your dream home.
+            </Heading>
+            <Link href="/shop">
+              <Button
+                variant="solid"
+                color="white"
+                backgroundColor="coral.200"
+                width={48}
+                height={12}
+                fontSize="lg"
+                _hover={{ backgroundColor: "coral.100" }}
+                cursor="pointer"
+                zIndex={2}
+              >
+                Start shopping
+              </Button>
+            </Link>
+          </VStack>
+        </Section>
       </Stack>
 
       <Heading

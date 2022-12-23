@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 
-export default function Section({ children, maxW = 1000, py = 6 }) {
+export default function Section({ children, maxW = 1200, py = 6 }) {
   return (
     <Box
       width="100%"
