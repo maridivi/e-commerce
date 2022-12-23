@@ -39,7 +39,7 @@ export default function SingleProduct({ product }) {
             {title}
           </Text>
           <Text fontSize="xs" color="gray.500">
-            {price} €
+            {price.toString().replace(".", ",")} €
           </Text>
         </VStack>
       </VStack>

@@ -67,7 +67,6 @@ export default function ProductPage({ product }) {
       setCartItems(newCartItems);
     }
   }
-  console.log(cartItem);
 
   return (
     <Page>
@@ -114,7 +113,7 @@ export default function ProductPage({ product }) {
 
             <Text fontSize="sm">{product?.description}</Text>
             <Text fontSize="md" fontWeight="semibold">
-              {product?.price} €
+              {product?.price.toString().replace(".", ",")} €
             </Text>
 
             <HStack>
