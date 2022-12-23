@@ -3,6 +3,7 @@ import {
   HStack,
   Icon,
   IconButton,
+  Image,
   Link,
   Menu,
   MenuButton,
@@ -46,8 +47,8 @@ export default function Header() {
           // bgGradient="linear(to-b, #FAF7F0, white)"
         >
           <NextLink href="/">
-            <Link fontSize={22} fontFamily="lora, serif">
-              HOME
+            <Link fontSize={28} fontFamily="lora, serif" fontWeight="extrabold">
+              <Image alt="logo" src="/images/logo.png"></Image>
             </Link>
           </NextLink>
           <HStack gap={[2, 4, 6, 8]}>
@@ -93,7 +94,7 @@ export default function Header() {
                     justifyContent: "center",
                     zIndex: 2,
                   }}
-                  backgroundColor="pink.300"
+                  backgroundColor="coral.200"
                   position="absolute"
                   borderRadius="100%"
                 >
