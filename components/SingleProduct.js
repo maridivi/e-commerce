@@ -1,4 +1,4 @@
-import { Image, Stack, Text, VStack } from "@chakra-ui/react";
+import { Image, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 
 export default function SingleProduct({ product }) {

@@ -1,11 +1,8 @@
 import {
-  Box,
   Button,
   Divider,
   Grid,
   GridItem,
-  List,
-  ListItem,
   Text,
   VStack,
 } from "@chakra-ui/react";

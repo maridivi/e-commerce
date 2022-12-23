@@ -1,7 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import "../styles/globals.css";
-import useLocalStorage from "../utils/hooks/useLocalStorage";
 import "@fontsource/lora/400.css";
 import "@fontsource/inter/400.css";
 import theme from "../utils/theme";
