@@ -3,6 +3,7 @@ import {
   Divider,
   Grid,
   GridItem,
+  Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -39,46 +40,39 @@ export default function ReviewOrder() {
           Review your order
         </Text>
 
-        <Grid mb={16} templateColumns="repeat( auto-fit, minmax(150px, 1fr) )">
-          <GridItem>
-            <VStack align="start" spacing={0} padding={6}>
-              <Text fontWeight="bold" mt={6} mb={2}>
-                Your Shipping details
-              </Text>
+        <VStack alignItems="start" mb="20px">
+          <VStack align="start" spacing={0} padding={6}>
+            <Text fontWeight="bold" mt={6} mb={2}>
+              Your Shipping details
+            </Text>
 
-              <Text>{firstName.value}</Text>
-              <Text>{lastName.value}</Text>
-              <Text>{address.value}</Text>
-              <Text pb={6}>
-                {city.value + " " + state.value + " " + zip_code.value}
-              </Text>
+            <Text>{firstName.value}</Text>
+            <Text>{lastName.value}</Text>
+            <Text>{address.value}</Text>
+            <Text pb={6}>
+              {city.value + " " + state.value + " " + zip_code.value}
+            </Text>
 
-              <Text fontWeight="bold" pb={2}>
-                Your payment details
-              </Text>
-              <Text>XXXX-XXXX-XXXX-{card_number.value.substring(12)}</Text>
-              <Text>{exp_date.value}</Text>
-            </VStack>
-          </GridItem>
-          <GridItem>
-            <VStack
-              align="left"
-              boxShadow="lg"
-              borderRadius="10px"
-              padding={6}
-              height="100%"
-            >
-              <Text fontWeight="bold">Order Summary</Text>
-              <Text>Subtotal: {`${subTotal} €`} </Text>
-              <Text>Shipping: 4.99 €</Text>
-              <Divider />
-              <Text>Total: {`${Round(subTotal + 4.99)} €`}</Text>
-            </VStack>
-          </GridItem>
-        </Grid>
-        {/* </Stack> */}
+            <Text fontWeight="bold" pb={2}>
+              Your payment details
+            </Text>
+            <Text>XXXX-XXXX-XXXX-{card_number.value.substring(12)}</Text>
+            <Text>{exp_date.value}</Text>
+          </VStack>
+
+          <VStack align="left" padding={6} height="100%">
+            <Text fontWeight="bold">Order Summary</Text>
+            <Text>Subtotal: {`${subTotal} €`} </Text>
+            <Text>Shipping: 4.99 €</Text>
+            <Divider />
+            <Text>Total: {`${Round(subTotal + 4.99)} €`}</Text>
+          </VStack>
+        </VStack>
+
         <Link href="/order_confirmation">
-          <Button>Complete order</Button>
+          <Button backgroundColor="coral.200" color="white">
+            Complete order
+          </Button>
         </Link>
       </Section>
     </Page>
