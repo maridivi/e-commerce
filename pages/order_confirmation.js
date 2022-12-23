@@ -9,7 +9,7 @@ export default function OrderConfirmed() {
           Thank you for your purchase!
         </Text>
         <Text align="center">
-          Check your email for your order review and updates
+          Check your email for your order review and updates.
         </Text>
       </Stack>
     </Page>
