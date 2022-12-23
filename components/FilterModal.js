@@ -17,9 +17,9 @@ export default function FilterModal() {
     <>
       <Button
         onClick={onOpen}
-        backgroundColor="pink.400"
+        backgroundColor="coral.200"
         color="white"
-        _hover={{ backgroundColor: "pink.300" }}
+        _hover={{ backgroundColor: "coral.100" }}
         fontSize={["xs", "sm"]}
       >
         Show filters

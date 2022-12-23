@@ -90,7 +90,7 @@ export default function Shop({ products }) {
   return (
     <ProductsContext.Provider value={products}>
       <Page>
-        <Section maxW={1200}>
+        <Section>
           <HStack
             borderColor="blue"
             width="100%"

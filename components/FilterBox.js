@@ -21,7 +21,7 @@ export default function FilterBox() {
 
   function resetFilters() {
     setSelectedCategories([]);
-    setSliderValue([0, 1000]);
+    setSliderValue([0, 5000]);
     setCheckedState(defaultCheckedStates);
   }
 
@@ -48,7 +48,7 @@ export default function FilterBox() {
   }, [checkedState, setSelectedCategories]);
 
   return (
-    <Stack padding={6} gap={8}>
+    <Stack padding={2} gap={8}>
       <Stack>
         <Text fontWeight="extrabold" fontSize="lg">
           Categories
