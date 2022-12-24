@@ -20,7 +20,7 @@ const ProductsContext = createContext({
 });
 
 export const vercelApi = axios.create({
-  baseURL: process.env.VERCEL_URL ?? "http://localhost:3001/",
+  baseURL: "" ?? "http://localhost:3001/",
 });
 
 export async function getServerSideProps() {
