@@ -20,7 +20,7 @@ const ProductsContext = createContext({
 });
 
 export const vercelApi = axios.create({
-  baseURL: "" ?? "http://localhost:3001/",
+  baseURL: `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`,
 });
 
 export async function getServerSideProps() {
