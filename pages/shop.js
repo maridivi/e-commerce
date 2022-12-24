@@ -20,7 +20,8 @@ const ProductsContext = createContext({
 });
 
 export const vercelApi = axios.create({
-  baseURL: `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`,
+  baseURL:
+    process.env.NODE_ENV === "development" ? "http://localhost:3001" : "",
 });
 
 export async function getServerSideProps() {
@@ -52,7 +53,6 @@ export default function Shop({ products }) {
       res = products.filter((item) =>
         selectedCategories.includes(item.category)
       );
-      console.log(res);
     } else {
       res = products;
     }

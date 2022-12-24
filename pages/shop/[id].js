@@ -1,14 +1,6 @@
-import {
-  Button,
-  HStack,
-  Image,
-  Stack,
-  Text,
-  useToast,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, HStack, Image, Stack, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+
 import { useContext } from "react";
 import Page from "../../components/Page";
 import Section from "../../components/Section";
@@ -28,16 +20,13 @@ export async function getServerSideProps(context) {
 
 export default function ProductPage({ product }) {
   const { setCartItems, cartItems } = useContext(CartContext);
-  const router = useRouter();
-
-  const toast = useToast();
 
   const cartItem = cartItems.find((item) => item.id === product.id);
   const isAdded = !!cartItem;
 
   function addProduct() {
     const productExists = cartItems.find((item) => item.id === product.id);
-    console.log(productExists);
+
     if (productExists) {
       const newCartItems = cartItems.map((item) =>
         item.id === product.id
@@ -45,7 +34,6 @@ export default function ProductPage({ product }) {
           : item
       );
       setCartItems(newCartItems);
-      console.log(newCartItems);
     } else {
       const newCartItems = [...cartItems, { ...product, quantity: 1 }];
       setCartItems(newCartItems);

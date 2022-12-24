@@ -150,7 +150,6 @@ export default function CheckOut() {
     e.preventDefault();
 
     validateForm();
-    console.log(isValid);
 
     if (!isValid) return;
 
