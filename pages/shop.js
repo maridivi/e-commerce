@@ -29,6 +29,7 @@ export async function getServerSideProps() {
     const products = (await vercelApi.get("/api/products")).data;
     return { props: { products } };
   } catch (err) {
+    console.log(err);
     return { props: {} };
   }
 }
