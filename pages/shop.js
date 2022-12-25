@@ -6,29 +6,22 @@ import {
   useMediaQuery,
   VStack,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { createContext, useContext, useState } from "react";
 import FilterBox from "../components/FilterBox";
 import FilterModal from "../components/FilterModal";
 import Page from "../components/Page";
 import Section from "../components/Section";
 import SingleProduct from "../components/SingleProduct";
+import getProducts from "../utils/airtable/getProducts";
 import { FilterContext } from "./_app";
 
 const ProductsContext = createContext({
   fetchedProducts: undefined,
 });
 
-export const vercelApi = axios.create({
-  baseURL:
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3001"
-      : undefined,
-});
-
 export async function getServerSideProps() {
   try {
-    const products = (await vercelApi.get("/api/products")).data;
+    const products = await getProducts();
     return { props: { products } };
   } catch (err) {
     console.log(err);

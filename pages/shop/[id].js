@@ -1,19 +1,17 @@
 import { Button, HStack, Image, Stack, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
-
 import { useContext } from "react";
 import Page from "../../components/Page";
 import Section from "../../components/Section";
-import { vercelApi } from "../shop";
+import getProduct from "../../utils/airtable/getProduct";
 import { CartContext } from "../_app";
 
 export async function getServerSideProps(context) {
-  const id = context.query.id;
   try {
-    const product = (await vercelApi.get(`/api/products/${id}`)).data;
+    const id = context.query.id;
+    const product = await getProduct(id);
     return { props: { product } };
   } catch (err) {
-    console.error(err.toString(), id);
     return { props: {} };
   }
 }

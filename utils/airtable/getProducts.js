@@ -1,11 +1,6 @@
-const Airtable = require("airtable");
-const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
-  process.env.AIRTABLE_BASE_ID
-);
+import { table } from "./airtable-utils";
 
-const table = base(process.env.AIRTABLE_TABLE_NAME);
-
-export default async function getProducts(req, res) {
+export default async function getProducts() {
   try {
     const records = await table
       .select({
@@ -24,9 +19,8 @@ export default async function getProducts(req, res) {
       id: record.id,
     }));
 
-    res.status(200).json(products);
+    return JSON.parse(JSON.stringify(products));
   } catch (err) {
     console.error(err);
-    res.status(500);
   }
 }
