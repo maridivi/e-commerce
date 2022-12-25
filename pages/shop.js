@@ -23,7 +23,7 @@ export const vercelApi = axios.create({
   baseURL:
     process.env.NODE_ENV === "development"
       ? "http://localhost:3001"
-      : process.env.VERCEL_URL,
+      : undefined,
 });
 
 export async function getServerSideProps() {
