@@ -76,7 +76,7 @@ export default function CartItem({ item }) {
           fontSize={["xs", "md"]}
         >
           {quantities.map((q, i) => (
-            <option selected={q === quantity} key={i}>
+            <option defaultValue={q === quantity} key={i}>
               {q}
             </option>
           ))}
