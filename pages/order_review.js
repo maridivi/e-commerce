@@ -15,7 +15,7 @@ import { CartContext, UserContext } from "./_app";
 
 export default function ReviewOrder() {
   const { userData } = useContext(UserContext);
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   const {
     "First Name": firstName,
@@ -48,6 +48,7 @@ export default function ReviewOrder() {
 
             <Text>{firstName.value}</Text>
             <Text>{lastName.value}</Text>
+            <Text>{email.value}</Text>
             <Text>{address.value}</Text>
             <Text pb={6}>
               {city.value + " " + state.value + " " + zip_code.value}
@@ -70,7 +71,11 @@ export default function ReviewOrder() {
         </VStack>
 
         <Link href="/order_confirmation">
-          <Button backgroundColor="coral.200" color="white">
+          <Button
+            backgroundColor="coral.200"
+            color="white"
+            onClick={() => setCartItems([])}
+          >
             Complete order
           </Button>
         </Link>
